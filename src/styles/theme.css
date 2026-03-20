@@ -1,0 +1,12 @@
+:root {
+  --color-surface: #faf8f5;
+  --color-primary: #1a1a1a;
+  --color-secondary: #666666;
+  --color-accent: #8a7e6e;
+  --color-link: #2a4a7a;
+  --color-divider: #e0dcd6;
+  --color-data-bg: #f0ede8;
+  --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}

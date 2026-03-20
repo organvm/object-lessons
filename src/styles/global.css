@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './theme.css';
+
+@layer base {
+  body {
+    @apply bg-surface text-primary font-sans;
+    font-size: 17px;
+    line-height: 1.8;
+  }
+  h1, h2, h3, h4 {
+    @apply font-serif;
+  }
+  h1 { @apply text-4xl font-light tracking-wide; }
+  h2 { @apply text-2xl font-normal; }
+  h3 { @apply text-xl font-normal; }
+  a { @apply text-link underline-offset-2 hover:underline; }
+}
+
+@layer components {
+  .reading-column {
+    @apply max-w-reading mx-auto px-6;
+  }
+  .content-wide {
+    @apply max-w-content mx-auto px-6;
+  }
+}
