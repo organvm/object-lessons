@@ -17,4 +17,11 @@ export default defineConfig({
     tailwind(),
     sitemap(),
   ],
+  vite: {
+    ssr: {
+      resolve: {
+        conditions: ['workerd', 'worker', 'browser'],
+      },
+    },
+  },
 });

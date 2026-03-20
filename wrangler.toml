@@ -1,7 +1,9 @@
 name = "object-lessons"
-compatibility_date = "2024-12-01"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat_v2"]
+pages_build_output_dir = "dist"
 
 [[d1_databases]]
 binding = "DB"
 database_name = "object-lessons-submissions"
-database_id = ""
+database_id = "f1a89504-2ddd-4c9b-ade8-eb52f6aee7a3"
