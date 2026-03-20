@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SubmissionForm from '../components/react/SubmissionForm.tsx';
+---
+
+<BaseLayout
+  title="Submit — Object Lessons"
+  description="Help us build the most complete archive of recurring objects in cinema. Suggest an object, flag a film, or submit a timestamped clip."
+>
+  <div class="reading-column">
+    <h1 class="mb-6">Submit</h1>
+
+    <p class="mb-8 text-secondary leading-relaxed">
+      Help us build the most complete archive of recurring objects in cinema. We're looking for
+      objects we haven't covered, films we might have missed, and timestamped clips that
+      demonstrate an object's significance.
+    </p>
+
+    <div class="space-y-4 mb-10 border-l-2 border-divider pl-5">
+      <div>
+        <p class="font-sans text-sm font-medium text-primary mb-0.5">Suggest an Object</p>
+        <p class="text-secondary text-sm leading-relaxed">
+          Know an object that recurs meaningfully across films and hasn't been covered yet?
+          Tell us what it is, why it matters, and point us to a few examples.
+        </p>
+      </div>
+      <div>
+        <p class="font-sans text-sm font-medium text-primary mb-0.5">Flag a Film</p>
+        <p class="text-secondary text-sm leading-relaxed">
+          Spotted one of our tracked objects in a film we haven't catalogued? Give us the
+          title, the scene, and the context — we'll add it to the research queue.
+        </p>
+      </div>
+      <div>
+        <p class="font-sans text-sm font-medium text-primary mb-0.5">Submit a Clip</p>
+        <p class="text-secondary text-sm leading-relaxed">
+          Have a link to a specific clip that shows an object at work? A precise timestamp
+          and a URL go a long way toward making our archive the most accurate it can be.
+        </p>
+      </div>
+    </div>
+
+    <SubmissionForm client:load />
+  </div>
+</BaseLayout>
