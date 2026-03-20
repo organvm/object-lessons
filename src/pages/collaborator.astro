@@ -1,0 +1,14 @@
+---
+import DataLayout from '../layouts/DataLayout.astro';
+import CollaboratorDashboard from '../components/react/CollaboratorDashboard.tsx';
+import { parse } from 'yaml';
+import pipelineRaw from '../data/pipeline-status.yaml?raw';
+
+export const prerender = false;
+
+const pipeline = parse(pipelineRaw);
+---
+
+<DataLayout title="Collaborator Dashboard" description="Production status and submission review">
+  <CollaboratorDashboard client:load pipelineObjects={pipeline.objects} />
+</DataLayout>
