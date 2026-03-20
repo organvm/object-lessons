@@ -1,8 +1,154 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import YouTubeEmbed from '../components/astro/YouTubeEmbed.astro';
+import ObjectCard from '../components/astro/ObjectCard.astro';
+import EssayCard from '../components/astro/EssayCard.astro';
+
+// Latest episode: published or scripted, most recent by date
+const allEpisodes = await getCollection('episodes');
+const latestEpisode = allEpisodes
+  .filter(e => e.data.status === 'published' || e.data.status === 'scripted')
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())[0];
+
+// Object grid: all objects sorted by priority_score desc, then by status
+const allObjects = await getCollection('objects');
+const statusOrder: Record<string, number> = {
+  published: 0,
+  'in-production': 1,
+  researching: 2,
+  candidate: 3,
+};
+const sortedObjects = allObjects.sort((a, b) => {
+  if (b.data.priority_score !== a.data.priority_score) {
+    return b.data.priority_score - a.data.priority_score;
+  }
+  return (statusOrder[a.data.status] ?? 99) - (statusOrder[b.data.status] ?? 99);
+});
+
+// Latest essay
+const allEssays = await getCollection('essays');
+const latestEssay = allEssays.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())[0];
 ---
-<BaseLayout title="Object Lessons" description="The Recurring Objects of Cinema" isHome>
-  <div class="reading-column">
-    <p>Site under construction.</p>
-  </div>
+
+<BaseLayout
+  title="Object Lessons — The Recurring Objects of Cinema"
+  description="Tracing recurring objects across a hundred years of film. Milk, mirrors, cigarettes, clocks, doors, guns."
+  isHome={true}
+>
+
+  {/* 1. Manifesto hero */}
+  <section class="reading-column mb-20">
+    <p class="text-secondary text-xs uppercase tracking-widest mb-8 font-sans">Object Lessons</p>
+    <h1 class="mb-8 leading-tight">The Recurring Objects of Cinema</h1>
+
+    <p class="mb-4">
+      Objects pass through cinema unnoticed. The glass of milk on the table. The cigarette between
+      two fingers in a half-lit room. The clock on the wall, ticking behind the dialogue. We call
+      them props. We file them under "mise-en-scène" and move on. Until they don't let us.
+    </p>
+    <p class="mb-4">
+      Something happens when an object appears often enough, in the right contexts, across the
+      right films. It accumulates. It bifurcates — pulled away from its function toward meaning.
+      It condenses whole cultural anxieties into a graspable form. It estranges the ordinary into
+      the uncanny. And then it recurses: each new use responds to every previous one, rewriting
+      the archive that contains it.
+    </p>
+    <p class="mb-0">
+      These are the five mechanisms of object-attention: estrangement, accumulation, bifurcation,
+      condensation, recursion. Object Lessons tracks them — one object at a time, across a hundred
+      years of film. We compile every significant appearance. We classify patterns. We identify
+      landmarks. We show the clips. We look at the things that no one looks at. That is the lesson.
+    </p>
+  </section>
+
+  {/* 2. Latest episode */}
+  {latestEpisode && (
+    <section class="mb-20">
+      <div class="content-wide">
+        <p class="text-secondary text-xs uppercase tracking-widest mb-4 font-sans reading-column">
+          Latest Episode
+        </p>
+        <YouTubeEmbed
+          videoId={latestEpisode.data.youtube_id}
+          title={latestEpisode.data.title}
+        />
+      </div>
+      <div class="reading-column mt-6">
+        <h2 class="mb-2">
+          <a href={`/episodes/${latestEpisode.slug}`} class="no-underline hover:underline text-primary">
+            {latestEpisode.data.title}
+          </a>
+        </h2>
+        <div class="flex items-center gap-3 text-sm text-secondary flex-wrap">
+          <span class="capitalize text-accent font-medium">{latestEpisode.data.object}</span>
+          <span aria-hidden="true">·</span>
+          <time datetime={latestEpisode.data.date.toISOString()}>
+            {latestEpisode.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}
+          </time>
+          {latestEpisode.data.companion_essay && (
+            <>
+              <span aria-hidden="true">·</span>
+              <a href={`/essays/${latestEpisode.data.companion_essay}`} class="text-link hover:underline">
+                Read the companion essay →
+              </a>
+            </>
+          )}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {/* 3. Object grid */}
+  <section class="mb-20">
+    <div class="content-wide">
+      <p class="text-secondary text-xs uppercase tracking-widest mb-6 font-sans">Objects</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {sortedObjects.map(obj => (
+          <ObjectCard
+            name={obj.data.name}
+            slug={obj.slug}
+            status={obj.data.status}
+            filmCount={obj.data.film_count}
+            priorityScore={obj.data.priority_score}
+          />
+        ))}
+      </div>
+      <div class="mt-6 text-sm">
+        <a href="/objects" class="text-link hover:underline">All objects →</a>
+      </div>
+    </div>
+  </section>
+
+  {/* 4. Latest essay */}
+  {latestEssay && (
+    <section class="mb-20">
+      <div class="reading-column">
+        <p class="text-secondary text-xs uppercase tracking-widest mb-4 font-sans">Latest Essay</p>
+        <EssayCard
+          title={latestEssay.data.title}
+          slug={latestEssay.slug}
+          object={latestEssay.data.object}
+          type={latestEssay.data.type}
+          date={latestEssay.data.date}
+          excerpt={latestEssay.data.excerpt}
+          relatedEpisode={latestEssay.data.related_episodes[0]}
+        />
+        <div class="mt-4 text-sm">
+          <a href="/essays" class="text-link hover:underline">All essays →</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {/* 5. Call to action */}
+  <section class="mb-12">
+    <div class="reading-column border-t border-divider pt-10">
+      <p class="text-secondary text-sm">
+        Seen an object we missed?{' '}
+        <a href="/submit" class="text-link hover:underline">Submit a film →</a>
+      </p>
+    </div>
+  </section>
+
 </BaseLayout>

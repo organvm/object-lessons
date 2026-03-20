@@ -1,0 +1,217 @@
+---
+import { getCollection } from 'astro:content';
+import EssayLayout from '../layouts/EssayLayout.astro';
+
+const allObjects = await getCollection('objects');
+// Film count from the dissertation spec; getFilms() is reserved for the ObjectDensityGraph
+// React island (Task 8) which will consume it at runtime.
+const FILM_COUNT = 302;
+---
+
+<EssayLayout
+  title="Research — Object Lessons"
+  description="The theoretical framework behind Object Lessons: the five mechanisms of object-attention, methodology, the dissertation in progress, and key bibliography."
+>
+
+  <h1>Research</h1>
+
+  <p>
+    Object Lessons is both a creative practice and an academic investigation. This page presents the
+    theoretical framework behind the work — the mechanisms we track, the methods we use, the
+    scholarly tradition we draw on, and the dissertation being produced in parallel with the
+    episodes.
+  </p>
+
+  <h2>The Five Mechanisms of Object-Attention</h2>
+
+  <p>
+    After cataloguing hundreds of object appearances across five tracked objects and 302 films, we
+    identified five mechanisms by which an object acquires cinematic significance beyond its literal
+    function. These are not mutually exclusive — most landmark object scenes activate several
+    simultaneously.
+  </p>
+
+  <h3>Estrangement</h3>
+
+  <p>
+    An object is estranged when it is pulled from its habitual context into one where its presence
+    becomes strange. A glass of milk in a sunlit kitchen is invisible — it belongs there. The same
+    glass carried slowly up a staircase by a man his wife suspects of wanting to kill her (Hitchcock,
+    <em>Suspicion</em>, 1941) becomes uncanny: familiar substance, wrong context, unbearable weight.
+    The mechanism descends from Shklovsky's defamiliarization, Heidegger's analysis of equipment
+    becoming conspicuous when it breaks, and Duchamp's readymades — the same object relocated into
+    a new context of attention.
+  </p>
+
+  <h3>Accumulation</h3>
+
+  <p>
+    Each significant appearance of an object deposits meaning into the cultural sediment. Milk after
+    Hitchcock (1941) and Kubrick (1971) and Peele (2017) is a denser substance than milk in 1935 —
+    it carries all previous uses as potential resonance, available to any filmmaker willing to
+    activate them. Accumulation is why the history of an object's appearances matters: you cannot
+    fully read a 2024 milk scene without the archive behind it.
+  </p>
+
+  <h3>Bifurcation</h3>
+
+  <p>
+    Bifurcation is the gap between function and meaning — the moment when what an object <em>is</em>
+    and what it <em>means</em> split apart. Milk IS nourishment, the first food, the substance of
+    new life. Milk in a Nazi interrogator's hands (Tarantino, <em>Inglourious Basterds</em>, 2009)
+    MEANS weaponized innocence: the surface of purity deployed in the service of violence. The
+    function remains. The meaning has inverted. Bifurcation is the most cinematically productive
+    operation — the gap between is and means is where symbol is born.
+  </p>
+
+  <h3>Condensation</h3>
+
+  <p>
+    Some objects become vessels for cultural anxieties too large and diffuse to be stated directly.
+    The gun condenses a century of American gun culture — all its mythology, politics, and
+    ambivalence — into a graspable form that any scene can deploy or complicate. The cigarette
+    condensed the tobacco industry's century of glamorization, addiction, and eventual
+    reckoning into a single prop that means different things depending on when the film was made.
+    Condensation is the process by which an object absorbs history and carries it forward.
+  </p>
+
+  <h3>Recursion</h3>
+
+  <p>
+    Each new cinematic use of an object responds to all previous uses, whether intentionally or not.
+    Jordan Peele's use of milk in <em>Get Out</em> (2017) responds to Kubrick's use in
+    <em>A Clockwork Orange</em> (1971) responds to Hitchcock's use in <em>Suspicion</em> (1941).
+    The archive is not static — it rewrites itself with each new significant appearance. Recursion
+    is why the most powerful uses tend to come from filmmakers who know the archive: they speak
+    with it, against it, or through it.
+  </p>
+
+  <h2>The Dissertation</h2>
+
+  <p>
+    Object Lessons is producing a formal dissertation:{' '}
+    <em>
+      Object-Attention in Art: A Dialectical Investigation Across Cinema, Representational Media,
+      and Cultural Process
+    </em>. It is structured as a Hegelian dialectic across three papers:
+  </p>
+
+  <ul>
+    <li>
+      <strong>Paper I — Thesis:</strong> Cinema is the privileged medium for object-attention.
+      The argument: duration, accumulation, and mass distribution give cinema unique power to
+      transform ordinary objects into cultural symbols.
+    </li>
+    <li>
+      <strong>Paper II — Antithesis:</strong> Cinema's privilege is demolished. Painting,
+      literature, theatre, photography, sound design, and video games each produce forms of
+      object-attention that cinema cannot replicate. The thesis is systematically dismantled.
+    </li>
+    <li>
+      <strong>Paper III — Synthesis:</strong> Cinema is special without being privileged. The
+      medium-inflection thesis: cinema inflects object-attention in ways specific to film, but
+      those inflections are not superior — they are distinct. The dissertation ends not with a
+      winner but with a topology of media and their specific relationships to things.
+    </li>
+  </ul>
+
+  <p>
+    The dissertation is being produced alongside the episodes, each feeding the other. Episodes
+    generate data; the dissertation generates frameworks for reading that data.
+  </p>
+
+  <h2>Methodology</h2>
+
+  <p>The Object Lessons methodology proceeds in seven stages:</p>
+
+  <ol>
+    <li>
+      <strong>Identification</strong> — Select the object. Criteria: visual distinctiveness,
+      cultural weight, frequency of appearance, potential for symbolic range.
+    </li>
+    <li>
+      <strong>Cataloguing</strong> — Compile every significant film appearance. Cast a wide net
+      first; prune for relevance. Document title, year, director, scene context.
+    </li>
+    <li>
+      <strong>Taxonomy</strong> — Classify appearances into symbolic categories (e.g., for milk:
+      innocence, corrupted innocence, weaponized milk, maternal body, sexual power). Categories
+      emerge from the data; they are not imposed in advance.
+    </li>
+    <li>
+      <strong>Deep analysis</strong> — Select tier-1 scenes (the landmarks) for close reading.
+      What is the object doing? What mechanisms are active? What cultural work is it performing?
+    </li>
+    <li>
+      <strong>Narrative arc</strong> — Identify the object's cinematic history: how did its
+      meaning evolve across decades? What were the pivotal films? Who established the patterns
+      others followed?
+    </li>
+    <li>
+      <strong>Theoretical grounding</strong> — Locate the object's cinematic life within the
+      broader scholarly tradition. What does the theory illuminate? What does the data challenge?
+    </li>
+    <li>
+      <strong>Cross-object analysis</strong> — Compare patterns across objects. Do the five
+      mechanisms appear consistently? Which objects are most prone to condensation? Which to
+      recursion? The cross-object layer is where the general theory emerges.
+    </li>
+  </ol>
+
+  <h2>Cross-Object Density</h2>
+
+  <p>
+    Across {FILM_COUNT} films and {allObjects.length} tracked objects, 13 films appear in
+    three or more symbolic categories across different objects. Two films achieve maximum
+    cross-object density (appearing significantly in 4 of 5 tracked object catalogues):{' '}
+    <em>A Clockwork Orange</em> and <em>Blade Runner</em>. These are the films that most
+    consistently deploy objects as primary bearers of meaning rather than as background
+    dressing — which may be why they have become such persistent cultural reference points.
+  </p>
+
+  <!-- ObjectDensityGraph island will be added in Task 8 -->
+  <div class="border border-divider rounded p-8 text-center text-secondary text-sm my-8">
+    Cross-object density visualization — coming in a future update.
+  </div>
+
+  <h2>Bibliography</h2>
+
+  <h4>Material Culture</h4>
+  <ul>
+    <li>Appadurai, Arjun, ed. <em>The Social Life of Things: Commodities in Cultural Perspective</em>. Cambridge UP, 1986.</li>
+    <li>Kopytoff, Igor. "The Cultural Biography of Things." In Appadurai, ed., 1986.</li>
+    <li>Brown, Bill. "Thing Theory." <em>Critical Inquiry</em> 28.1 (2001): 1–22.</li>
+    <li>Daston, Lorraine, ed. <em>Things That Talk: Object Lessons from Art and Science</em>. Zone Books, 2004.</li>
+  </ul>
+
+  <h4>Semiotics &amp; Cultural Theory</h4>
+  <ul>
+    <li>Barthes, Roland. <em>Mythologies</em>. Seuil, 1957.</li>
+    <li>Baudrillard, Jean. <em>The System of Objects</em>. Gallimard, 1968.</li>
+    <li>Eco, Umberto. <em>A Theory of Semiotics</em>. Indiana UP, 1976.</li>
+  </ul>
+
+  <h4>Phenomenology &amp; Object Philosophy</h4>
+  <ul>
+    <li>Heidegger, Martin. "The Question Concerning Technology." 1954.</li>
+    <li>Harman, Graham. <em>Tool-Being: Heidegger and the Metaphysics of Objects</em>. Open Court, 2002.</li>
+    <li>Bennett, Jane. <em>Vibrant Matter: A Political Ecology of Things</em>. Duke UP, 2010.</li>
+    <li>Bogost, Ian. <em>Alien Phenomenology, or What It's Like to Be a Thing</em>. Minnesota UP, 2012.</li>
+  </ul>
+
+  <h4>Film Theory</h4>
+  <ul>
+    <li>Bazin, André. <em>What Is Cinema?</em> Vols. I–II. Trans. Hugh Gray. California UP, 1967–1971.</li>
+    <li>Tarkovsky, Andrei. <em>Sculpting in Time</em>. Trans. Kitty Hunter-Blair. Knopf, 1987.</li>
+    <li>Sobchack, Vivian. <em>The Address of the Eye: A Phenomenology of Film Experience</em>. Princeton UP, 1992.</li>
+    <li>Elsaesser, Thomas, and Malte Hagener. <em>Film Theory: An Introduction Through the Senses</em>. Routledge, 2010.</li>
+  </ul>
+
+  <h4>Defamiliarization &amp; Estrangement</h4>
+  <ul>
+    <li>Shklovsky, Viktor. "Art as Technique." 1917. In <em>Russian Formalist Criticism</em>. Nebraska UP, 1965.</li>
+    <li>Brecht, Bertolt. <em>Brecht on Theatre</em>. Ed. John Willett. Hill and Wang, 1964.</li>
+    <li>Freud, Sigmund. "The Uncanny." 1919. In <em>The Standard Edition</em>, Vol. XVII.</li>
+  </ul>
+
+</EssayLayout>

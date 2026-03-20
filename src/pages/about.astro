@@ -1,0 +1,127 @@
+---
+import EssayLayout from '../layouts/EssayLayout.astro';
+import { siteConfig } from '../../site.config';
+---
+
+<EssayLayout
+  title="About — Object Lessons"
+  description="Object Lessons traces recurring objects across a hundred years of cinema. Created by Anthony and Chris. Returning with V2 — the narrated hybrid format."
+>
+
+  <h1>About Object Lessons</h1>
+
+  <h2>Who We Are</h2>
+
+  <p>
+    Object Lessons is a film channel created by Anthony and Chris. We started in 2017 with a
+    simple premise: what if you watched every film ever made and tracked a single object through
+    all of them? We produced four original compilation episodes — Cereal, Telephones, Balloons,
+    Eggs — before going dormant in 2020.
+  </p>
+  <p>
+    We're back. Object Lessons V2 is the narrated hybrid format: compilation footage, narration,
+    analysis. The same obsessive cataloguing, now with a voice and a thesis.
+  </p>
+
+  <h2>What We Do</h2>
+
+  <p>
+    We pick a single object. We trace it across a hundred years of film. We compile every
+    significant appearance — not just the famous ones, not just the obvious ones, but the ones
+    that reveal something when placed next to each other. We classify the patterns. We identify
+    the landmarks. We show the clips.
+  </p>
+  <p>
+    An object becomes interesting at the point where its accumulation of appearances produces
+    meaning that no single appearance could generate on its own. A glass of milk in a 1935
+    kitchen comedy is one thing. That same glass in the hands of a character you suspect is
+    poisoning his wife is another. The same glass in a dystopian future's breakfast ritual is
+    another still. We watch for the moment an object bifurcates — the moment it splits from
+    what it is into what it means.
+  </p>
+
+  <h2>Why It Matters</h2>
+
+  <p>
+    Objects are the unexamined substrate of cinema. We study directors, actors, screenwriters,
+    genres, studios, national cinemas. We rarely study the things. And yet objects carry
+    enormous cultural weight across decades of film history — accumulating, shifting, reflecting
+    the anxieties of the eras that put them on screen. The cigarette in 1940 is not the
+    cigarette in 1980. The gun in a western is not the gun in a school thriller. The mirror in
+    every horror film knows something the characters don't.
+  </p>
+  <p>
+    Tracking objects is a way of reading cinema sideways — not through auteur or genre, but
+    through the things that persist regardless of who made the film or when.
+  </p>
+
+  <h2>The Intellectual Tradition</h2>
+
+  <p>
+    Object Lessons stands in a long line of inquiry into things and their cultural lives.
+    Material culture studies (Arjun Appadurai, Igor Kopytoff, Bill Brown) established that
+    objects have social biographies — they accumulate meaning as they move between contexts.
+    Semiotics (Roland Barthes, Jean Baudrillard) showed how objects function as signs, carrying
+    mythological freight beyond their utility. Phenomenology and object-oriented philosophy
+    (Martin Heidegger, Graham Harman, Jane Bennett) asked what objects are when no one is
+    looking. And film theory (André Bazin, Andrei Tarkovsky) has always been attentive to the
+    way cinema renders the material world — its weight, texture, and irreducibility. We work in
+    all four traditions at once.
+  </p>
+
+  <h2>For Researchers</h2>
+
+  <p>
+    Object Lessons has a formal academic dimension. Visit our{' '}
+    <a href="/research">Research</a> page for the full methodology, the five mechanisms of
+    object-attention, and the dissertation in progress.
+  </p>
+
+  <h2>Links</h2>
+
+  <ul>
+    {siteConfig.socials.youtube && (
+      <li>
+        <a href={siteConfig.socials.youtube} target="_blank" rel="noopener noreferrer">
+          YouTube
+        </a>
+      </li>
+    )}
+    {siteConfig.socials.patreon && (
+      <li>
+        <a href={siteConfig.socials.patreon} target="_blank" rel="noopener noreferrer">
+          Patreon
+        </a>
+      </li>
+    )}
+    {siteConfig.socials.letterboxd && (
+      <li>
+        <a href={siteConfig.socials.letterboxd} target="_blank" rel="noopener noreferrer">
+          Letterboxd
+        </a>
+      </li>
+    )}
+    {siteConfig.socials.bluesky && (
+      <li>
+        <a href={siteConfig.socials.bluesky} target="_blank" rel="noopener noreferrer">
+          Bluesky
+        </a>
+      </li>
+    )}
+    {siteConfig.socials.email && (
+      <li>
+        <a href={`mailto:${siteConfig.socials.email}`}>
+          {siteConfig.socials.email}
+        </a>
+      </li>
+    )}
+    <li>
+      <a href="/rss.xml">RSS Feed</a>
+    </li>
+  </ul>
+
+  <h2>Credits</h2>
+
+  <p>Original music by ETCETER4.</p>
+
+</EssayLayout>

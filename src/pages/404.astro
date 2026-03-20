@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="404 — Page Not Found — Object Lessons"
+  description="The page you are looking for could not be found."
+>
+  <div class="reading-column text-center">
+    <h1 class="mb-4">Page Not Found</h1>
+    <p class="text-secondary mb-10">
+      The object you're looking for has withdrawn from view.
+    </p>
+    <nav aria-label="Navigation options">
+      <ul class="list-none p-0 m-0 flex flex-col items-center gap-3 text-sm">
+        <li><a href="/" class="text-link hover:underline">Home</a></li>
+        <li><a href="/episodes" class="text-link hover:underline">Episodes</a></li>
+        <li><a href="/objects" class="text-link hover:underline">Objects</a></li>
+        <li><a href="/essays" class="text-link hover:underline">Essays</a></li>
+      </ul>
+    </nav>
+  </div>
+</BaseLayout>
