@@ -1,0 +1,159 @@
+---
+import DataLayout from '../layouts/DataLayout.astro';
+import PipelineTimeline from '../components/react/PipelineTimeline.tsx';
+import { parse } from 'yaml';
+
+// Use Vite raw import to avoid readFileSync issues with Cloudflare adapter
+import pipelineRaw from '../data/pipeline-status.yaml?raw';
+const pipeline = parse(pipelineRaw);
+
+const sortedObjects = [...pipeline.objects].sort((a: { target_release: string }, b: { target_release: string }) =>
+  a.target_release.localeCompare(b.target_release)
+);
+
+const researchQueue = sortedObjects.filter(
+  (o: { status: string }) => o.status === 'researching' || o.status === 'candidate' || o.status === 'needs-recording'
+);
+
+function formatDate(dateStr: string): string {
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+const statusLabels: Record<string, string> = {
+  'published': 'Published',
+  'narration-complete': 'Narration Complete',
+  'needs-recording': 'Needs Recording',
+  'researching': 'Researching',
+  'candidate': 'Candidate',
+};
+---
+
+<DataLayout
+  title="Production Pipeline — Object Lessons"
+  description="The Object Lessons production pipeline: current sprint, release schedule, and research queue across all tracked objects."
+>
+  {/* Page header */}
+  <div class="mb-10">
+    <p class="text-xs font-sans uppercase tracking-widest text-secondary mb-2">Object Lessons</p>
+    <h1 class="font-serif text-3xl font-medium text-primary mb-2">Production Pipeline</h1>
+    <p class="text-secondary text-sm font-sans">
+      Sprint: <span class="font-medium text-primary">{pipeline.current_sprint}</span>
+      &nbsp;·&nbsp;
+      Last updated: <span class="font-medium text-primary">{pipeline.last_updated}</span>
+    </p>
+  </div>
+
+  {/* Timeline island */}
+  <section class="mb-14">
+    <h2 class="text-sm font-sans font-semibold uppercase tracking-widest text-secondary mb-6">
+      Release Timeline
+    </h2>
+    <PipelineTimeline client:visible objects={pipeline.objects} />
+  </section>
+
+  {/* Object queue — all objects */}
+  <section class="mb-14">
+    <h2 class="text-sm font-sans font-semibold uppercase tracking-widest text-secondary mb-4">
+      All Objects
+    </h2>
+    <div class="overflow-x-auto rounded border border-divider">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-divider bg-data-bg">
+            <th scope="col" class="px-4 py-3 text-left text-xs font-sans font-semibold uppercase tracking-widest text-secondary">Object</th>
+            <th scope="col" class="px-4 py-3 text-left text-xs font-sans font-semibold uppercase tracking-widest text-secondary">Status</th>
+            <th scope="col" class="px-4 py-3 text-left text-xs font-sans font-semibold uppercase tracking-widest text-secondary">Films</th>
+            <th scope="col" class="px-4 py-3 text-left text-xs font-sans font-semibold uppercase tracking-widest text-secondary">Stages</th>
+            <th scope="col" class="px-4 py-3 text-left text-xs font-sans font-semibold uppercase tracking-widest text-secondary">Target</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sortedObjects.map((obj: { name: string; status: string; research_films: number; outline: string; narration: string; edit: string; target_release: string }, i: number) => (
+            <tr class={`border-b border-divider last:border-0 ${i % 2 === 0 ? '' : 'bg-data-bg/30'}`}>
+              <td class="px-4 py-3 font-serif font-medium text-primary">{obj.name}</td>
+              <td class="px-4 py-3">
+                <span class={`text-xs font-mono px-1.5 py-0.5 rounded border ${
+                  obj.status === 'published'
+                    ? 'border-green-300 text-green-700 bg-green-50'
+                    : obj.status === 'narration-complete'
+                      ? 'border-amber-300 text-amber-700 bg-amber-50'
+                      : 'border-divider text-secondary bg-data-bg'
+                }`}>
+                  {statusLabels[obj.status] ?? obj.status.replace(/-/g, ' ')}
+                </span>
+              </td>
+              <td class="px-4 py-3 text-secondary font-mono text-xs">{obj.research_films}</td>
+              <td class="px-4 py-3">
+                <div class="flex gap-1 flex-wrap">
+                  {(['outline', 'narration', 'edit'] as const).map(stage => (
+                    <span class={`text-xs font-mono px-1 py-0.5 rounded border ${
+                      (obj as Record<string, string>)[stage] === 'complete'
+                        ? 'border-green-300 text-green-700 bg-green-50'
+                        : (obj as Record<string, string>)[stage] === 'not-started'
+                          ? 'border-divider text-secondary bg-data-bg opacity-50'
+                          : 'border-amber-300 text-amber-700 bg-amber-50'
+                    }`}>
+                      {stage.slice(0, 3)}
+                    </span>
+                  ))}
+                </div>
+              </td>
+              <td class="px-4 py-3 text-secondary text-xs font-sans whitespace-nowrap">{formatDate(obj.target_release)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  {/* Research queue */}
+  {researchQueue.length > 0 && (
+    <section class="mb-14">
+      <h2 class="text-sm font-sans font-semibold uppercase tracking-widest text-secondary mb-4">
+        Research Queue
+      </h2>
+      <ul class="space-y-3 list-none p-0 m-0">
+        {researchQueue.map((obj: { name: string; status: string; research_films: number; target_release: string; notes: string }) => (
+          <li class="border border-divider rounded p-4 bg-data-bg/40">
+            <div class="flex items-start justify-between gap-4 mb-2">
+              <div>
+                <span class="font-serif font-medium text-primary">{obj.name}</span>
+                <span class="text-xs text-secondary font-sans ml-3">{obj.research_films} films · {formatDate(obj.target_release)}</span>
+              </div>
+              <span class="text-xs font-mono px-1.5 py-0.5 rounded border border-divider text-secondary flex-shrink-0">
+                {statusLabels[obj.status] ?? obj.status.replace(/-/g, ' ')}
+              </span>
+            </div>
+            {obj.notes && (
+              <p class="text-sm text-secondary leading-relaxed m-0">{obj.notes}</p>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {/* Submissions summary */}
+  {pipeline.submissions_pending && (
+    <section class="border border-divider rounded p-6 bg-data-bg/40 mb-10">
+      <h2 class="text-sm font-sans font-semibold uppercase tracking-widest text-secondary mb-3">
+        Pending Submissions
+      </h2>
+      <div class="flex flex-wrap gap-8 text-sm font-sans">
+        <div>
+          <span class="text-2xl font-serif font-medium text-primary">{pipeline.submissions_pending.objects}</span>
+          <span class="text-secondary ml-2">objects</span>
+        </div>
+        <div>
+          <span class="text-2xl font-serif font-medium text-primary">{pipeline.submissions_pending.films}</span>
+          <span class="text-secondary ml-2">films</span>
+        </div>
+        <div>
+          <span class="text-2xl font-serif font-medium text-primary">{pipeline.submissions_pending.clips}</span>
+          <span class="text-secondary ml-2">clips</span>
+        </div>
+      </div>
+    </section>
+  )}
+</DataLayout>

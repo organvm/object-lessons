@@ -3,7 +3,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import YouTubeEmbed from '../../components/astro/YouTubeEmbed.astro';
 import StatusBadge from '../../components/astro/StatusBadge.astro';
 import EpisodeCard from '../../components/astro/EpisodeCard.astro';
+import FilmographyTable from '../../components/react/FilmographyTable.tsx';
 import { getCollection } from 'astro:content';
+import { parse } from 'yaml';
+import filmsRaw from '../../data/films.yaml?raw';
 
 export async function getStaticPaths() {
   const episodes = await getCollection('episodes');
@@ -12,6 +15,35 @@ export async function getStaticPaths() {
 
 const { episode } = Astro.props;
 const { Content } = await episode.render();
+
+// Film data for the FilmographyTable island
+const allFilms = parse(filmsRaw) as Array<{
+  id: string;
+  title: string;
+  year: number;
+  director: string;
+  density_score: number;
+  letterboxd_url?: string;
+  imdb_id?: string;
+  objects: Array<{
+    object: string;
+    scenes: Array<{ description: string; symbolic_category: string; tier: number }>;
+  }>;
+}>;
+const episodeFilmIds: string[] = episode.data.films ?? [];
+const filmData = allFilms
+  .filter(f => episodeFilmIds.includes(f.id))
+  .map(f => ({
+    id: f.id,
+    title: f.title,
+    year: f.year,
+    director: f.director,
+    letterboxd_url: f.letterboxd_url,
+    imdb_id: f.imdb_id,
+    scenes: f.objects
+      .filter(o => o.object === episode.data.object)
+      .flatMap(o => o.scenes),
+  }));
 
 const formattedDate = episode.data.date.toLocaleDateString('en-US', {
   year: 'numeric',
@@ -122,9 +154,10 @@ const jsonLd = {
     )}
   </div>
 
-  {/* FilmographyTable placeholder — content wide */}
-  <div id="filmography-placeholder" class="content-wide my-12">
-    <p class="text-secondary text-center font-sans text-sm">Filmography table loading...</p>
+  {/* FilmographyTable island — content wide */}
+  <div class="content-wide my-12">
+    <h2 class="text-2xl font-serif mb-6">Filmography</h2>
+    <FilmographyTable client:visible films={filmData} objectFilter={episode.data.object} />
   </div>
 
   {/* Related episodes */}

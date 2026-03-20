@@ -1,11 +1,41 @@
 ---
 import { getCollection } from 'astro:content';
 import EssayLayout from '../layouts/EssayLayout.astro';
+import ObjectDensityGraph from '../components/react/ObjectDensityGraph.tsx';
+import { parse } from 'yaml';
+import filmsRaw from '../data/films.yaml?raw';
 
 const allObjects = await getCollection('objects');
-// Film count from the dissertation spec; getFilms() is reserved for the ObjectDensityGraph
-// React island (Task 8) which will consume it at runtime.
+// Film count from the dissertation spec; actual films are loaded for the density graph below.
 const FILM_COUNT = 302;
+
+// Transform film data for the ObjectDensityGraph island
+const allFilms = parse(filmsRaw) as Array<{
+  id: string;
+  title: string;
+  year: number;
+  director: string;
+  density_score: number;
+  letterboxd_url?: string;
+  imdb_id?: string;
+  objects: Array<{
+    object: string;
+    scenes: Array<{ description: string; symbolic_category: string; tier: number }>;
+  }>;
+}>;
+
+const densityFilms = allFilms
+  .filter(f => f.density_score >= 2)
+  .map(f => ({
+    id: f.id,
+    title: f.title,
+    year: f.year,
+    director: f.director,
+    objects: f.objects.map(o => o.object),
+    density_score: f.density_score,
+  }));
+
+const objectNames = ['milk', 'mirrors', 'cigarette', 'clock', 'door', 'gun'];
 ---
 
 <EssayLayout
@@ -169,9 +199,8 @@ const FILM_COUNT = 302;
     dressing — which may be why they have become such persistent cultural reference points.
   </p>
 
-  <!-- ObjectDensityGraph island will be added in Task 8 -->
-  <div class="border border-divider rounded p-8 text-center text-secondary text-sm my-8">
-    Cross-object density visualization — coming in a future update.
+  <div class="my-8 not-prose">
+    <ObjectDensityGraph client:visible films={densityFilms} objects={objectNames} />
   </div>
 
   <h2>Bibliography</h2>

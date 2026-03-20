@@ -1,7 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import StatusBadge from '../../components/astro/StatusBadge.astro';
+import FilmographyTable from '../../components/react/FilmographyTable.tsx';
 import { getCollection } from 'astro:content';
+import { parse } from 'yaml';
+import filmsRaw from '../../data/films.yaml?raw';
 
 export async function getStaticPaths() {
   const objects = await getCollection('objects');
@@ -20,6 +23,35 @@ const allEssays = await getCollection('essays');
 
 const relatedEpisodes = allEpisodes.filter(e => obj.data.episodes.includes(e.slug));
 const relatedEssays = allEssays.filter(e => obj.data.essays.includes(e.slug));
+
+// Film data for the FilmographyTable island — all films featuring this object
+const allFilms = parse(filmsRaw) as Array<{
+  id: string;
+  title: string;
+  year: number;
+  director: string;
+  density_score: number;
+  letterboxd_url?: string;
+  imdb_id?: string;
+  objects: Array<{
+    object: string;
+    scenes: Array<{ description: string; symbolic_category: string; tier: number }>;
+  }>;
+}>;
+const objectSlug = obj.slug;
+const filmData = allFilms
+  .filter(f => f.objects.some(o => o.object === objectSlug))
+  .map(f => ({
+    id: f.id,
+    title: f.title,
+    year: f.year,
+    director: f.director,
+    letterboxd_url: f.letterboxd_url,
+    imdb_id: f.imdb_id,
+    scenes: f.objects
+      .filter(o => o.object === objectSlug)
+      .flatMap(o => o.scenes),
+  }));
 ---
 
 <BaseLayout
@@ -116,9 +148,12 @@ const relatedEssays = allEssays.filter(e => obj.data.essays.includes(e.slug));
     </div>
   )}
 
-  {/* FilmographyTable placeholder — content wide */}
-  <div id="filmography-placeholder" class="content-wide my-12">
-    <p class="text-secondary text-center font-sans text-sm">Filmography table loading...</p>
+  {/* FilmographyTable island — content wide */}
+  <div class="content-wide my-12">
+    <h2 class="text-sm uppercase tracking-widest text-secondary font-sans font-medium mb-6">
+      Filmography
+    </h2>
+    <FilmographyTable client:visible films={filmData} objectFilter={objectSlug} />
   </div>
 
   {/* Related episodes — reading column */}
