@@ -1,0 +1,131 @@
+# Object Lessons — Production Pipeline Status
+# V2 objects: newly researched and scripted for 2026 release
+# V1 objects: originally published 2018–2020 (The Cereal Box, Telephones, Balloons, Eggs)
+
+current_sprint: "V2-Series-Phase-2"
+last_updated: "2026-03-20"
+
+objects:
+  # ── V2 SERIES ────────────────────────────────────────────────────────────────
+
+  - name: Milk
+    status: narration-complete
+    research_films: 34
+    outline: complete
+    narration: complete
+    edit: not-started
+    target_release: "2026-05-01"
+    notes: >
+      Narration recorded March 2026. Arc: corrupted innocence (Suspicion) →
+      domestic danger (Get Out) → maternal ambivalence (Rosemary's Baby) →
+      the body's last pure substance turned instrument of control.
+
+  - name: Mirrors
+    status: narration-complete
+    research_films: 41
+    outline: complete
+    narration: complete
+    edit: not-started
+    target_release: "2026-05-15"
+    notes: >
+      Widest object in the database — every major director uses it differently.
+      Arc: vanity (Snow White) → self-recognition (Persona) → death portal (Orphée) →
+      the mirror as cinema's self-referential organ.
+
+  - name: Cigarettes
+    status: needs-recording
+    research_films: 38
+    outline: complete
+    narration: not-started
+    edit: not-started
+    target_release: "2026-06-01"
+    notes: >
+      Most historically bounded object — the arc is also cinema's own arc.
+      The cigarette disappears from films as it disappears from public life.
+      Script complete. Waiting on recording session.
+
+  - name: Clocks
+    status: needs-recording
+    research_films: 29
+    outline: complete
+    narration: not-started
+    edit: not-started
+    target_release: "2026-06-15"
+    notes: >
+      High Noon's real-time structure as anchor. Bergson vs. cinema-time.
+      The clock as the film medium's own anxiety externalized.
+
+  - name: Doors
+    status: needs-recording
+    research_films: 47
+    outline: complete
+    narration: not-started
+    edit: not-started
+    target_release: "2026-07-01"
+    notes: >
+      Largest research corpus. The door is cinema's most elemental threshold device.
+      Structure follows threshold theory — entry, refusal, crossing, return.
+      Script drafted, needs final pass before recording.
+
+  - name: Guns
+    status: needs-recording
+    research_films: 31
+    outline: complete
+    narration: not-started
+    edit: not-started
+    target_release: "2026-07-15"
+    notes: >
+      The most fraught object — requires care with context and framing.
+      Arc: the Western gun as mythic extension → the modern gun's desymbolization →
+      Chigurh's bolt pistol as the endpoint of that arc.
+
+  # ── V1 SERIES (published) ─────────────────────────────────────────────────
+
+  - name: The Cereal Box
+    status: published
+    research_films: 12
+    outline: complete
+    narration: complete
+    edit: complete
+    target_release: "2018-09-14"
+    notes: >
+      First episode. Establishes the series format. Objects in the American
+      domestic interior as anxiety objects — the breakfast table as ideological theater.
+
+  - name: Telephones
+    status: published
+    research_films: 18
+    outline: complete
+    narration: complete
+    edit: complete
+    target_release: "2019-02-07"
+    notes: >
+      The telephone as the film object most changed by technology.
+      Mobile phone = loss of the cord, loss of confinement, loss of dramatic stakes.
+
+  - name: Balloons
+    status: published
+    research_films: 9
+    outline: complete
+    narration: complete
+    edit: complete
+    target_release: "2019-11-21"
+    notes: >
+      Lightest object, heaviest symbolism. The balloon as the cinematic object
+      most associated with childhood, grief, and the fragility of joy.
+
+  - name: Eggs
+    status: published
+    research_films: 14
+    outline: complete
+    narration: complete
+    edit: complete
+    target_release: "2020-06-03"
+    notes: >
+      Final V1 episode before the production hiatus. Potentiality, fragility,
+      the unhatched as film's image of unrealized futures.
+
+submissions_pending:
+  objects: 3
+  films: 27
+  clips: 11

@@ -1,0 +1,629 @@
+# Object Lessons — Film Database
+# density_score: number of tracked objects appearing in the film (1–5+)
+
+- id: clockwork-orange-1971
+  title: A Clockwork Orange
+  year: 1971
+  director: Stanley Kubrick
+  objects:
+    - object: milk
+      scenes:
+        - description: "Korova Milk Bar — milk-plus as a vehicle for ultraviolence, corrupted innocence made liquid"
+          symbolic_category: corrupted-innocence
+          tier: 1
+    - object: cigarette
+      scenes:
+        - description: "Alex smokes with languid aesthete's pleasure — tobacco as ultraviolent style signal"
+          symbolic_category: rebellion
+          tier: 2
+    - object: clock
+      scenes:
+        - description: "The title IS the thesis: clockwork mechanism imposed on organic being; Beethoven-tempo conditioning"
+          symbolic_category: mechanism-vs-organism
+          tier: 1
+    - object: mirror
+      scenes:
+        - description: "Alex confronts his own image throughout — narcissism as violence; the self as spectacle"
+          symbolic_category: vanity-violence
+          tier: 2
+  density_score: 4
+  letterboxd_url: https://letterboxd.com/film/a-clockwork-orange/
+  imdb_id: tt0066921
+
+- id: blade-runner-1982
+  title: Blade Runner
+  year: 1982
+  director: Ridley Scott
+  objects:
+    - object: mirror
+      scenes:
+        - description: "Rachael sees herself in Deckard's apartment mirror — replicant self-recognition, the question of soul"
+          symbolic_category: identity-crisis
+          tier: 1
+        - description: "Leon's photograph collection — mirror of memory for beings who have none"
+          symbolic_category: artificial-memory
+          tier: 2
+    - object: cigarette
+      scenes:
+        - description: "Deckard chain-smokes throughout — noir iconography in a posthuman world, humanity's last gesture"
+          symbolic_category: noir-melancholy
+          tier: 1
+    - object: clock
+      scenes:
+        - description: "Roy Batty's countdown — four-year lifespan as the ultimate clock, ticking toward C-beam extinction"
+          symbolic_category: mortality
+          tier: 1
+    - object: gun
+      scenes:
+        - description: "The blaster as tool of a broken institution — retirement as euphemism, execution as labor"
+          symbolic_category: state-violence
+          tier: 1
+  density_score: 4
+  letterboxd_url: https://letterboxd.com/film/blade-runner/
+  imdb_id: tt0083658
+
+- id: the-shining-1980
+  title: The Shining
+  year: 1980
+  director: Stanley Kubrick
+  objects:
+    - object: mirror
+      scenes:
+        - description: "Wendy reads REDRUM in mirror — reversal as revelation, the uncanny double"
+          symbolic_category: uncanny-double
+          tier: 1
+        - description: "Room 237 bathroom mirror — the woman ages in reverse reflection, beauty and decay"
+          symbolic_category: beauty-decay
+          tier: 2
+    - object: door
+      scenes:
+        - description: "HERE'S JOHNNY — the axe through the door is the definitive threshold moment in horror"
+          symbolic_category: threshold-violence
+          tier: 1
+        - description: "Room 237 door — Jack's forbidden crossing, the invitation from the other side"
+          symbolic_category: forbidden-crossing
+          tier: 1
+    - object: clock
+      scenes:
+        - description: "The Overlook's frozen time — the hotel exists outside normal temporality, July 4th forever"
+          symbolic_category: frozen-time
+          tier: 2
+  density_score: 3
+  letterboxd_url: https://letterboxd.com/film/the-shining/
+  imdb_id: tt0081505
+
+- id: psycho-1960
+  title: Psycho
+  year: 1960
+  director: Alfred Hitchcock
+  objects:
+    - object: mirror
+      scenes:
+        - description: "Marion's motel room mirror — she watches herself decide to steal, complicity reflected back"
+          symbolic_category: self-knowledge
+          tier: 2
+        - description: "Norman's parlor — taxidermy reflections, the preserved past watching the living"
+          symbolic_category: preservation-obsession
+          tier: 2
+    - object: door
+      scenes:
+        - description: "Cabin 1 door — the threshold Marion crosses that she cannot uncross; point of no return"
+          symbolic_category: point-of-no-return
+          tier: 1
+        - description: "The fruit cellar door — the final revelation behind the door, the mother enthroned"
+          symbolic_category: revelation
+          tier: 1
+    - object: cigarette
+      scenes:
+        - description: "Marion smokes while Sam discusses their situation — the cigarette as nervous ritual before transgression"
+          symbolic_category: pre-transgression-ritual
+          tier: 3
+  density_score: 3
+  letterboxd_url: https://letterboxd.com/film/psycho/
+  imdb_id: tt0054215
+
+- id: 2001-a-space-odyssey-1968
+  title: 2001: A Space Odyssey
+  year: 1968
+  director: Stanley Kubrick
+  objects:
+    - object: door
+      scenes:
+        - description: "HAL's red eye as eternal door — the machine's gaze as threshold between human and posthuman"
+          symbolic_category: machine-threshold
+          tier: 1
+        - description: "The pod bay doors — 'I'm sorry Dave, I can't do that' — refusal as the ultimate door"
+          symbolic_category: refusal-threshold
+          tier: 1
+    - object: clock
+      scenes:
+        - description: "The bone-to-satellite cut — the longest clock in cinema, 4 million years of human time compressed"
+          symbolic_category: deep-time
+          tier: 1
+    - object: mirror
+      scenes:
+        - description: "The starchild — humanity reflected back as something unrecognizable, evolution as mirror"
+          symbolic_category: evolutionary-mirror
+          tier: 2
+  density_score: 3
+  letterboxd_url: https://letterboxd.com/film/2001-a-space-odyssey/
+  imdb_id: tt0062622
+
+- id: vertigo-1958
+  title: Vertigo
+  year: 1958
+  director: Alfred Hitchcock
+  objects:
+    - object: mirror
+      scenes:
+        - description: "Judy's transformation before the mirror — becoming Madeleine, the horror of the original fulfilled"
+          symbolic_category: transformation-horror
+          tier: 1
+        - description: "Scottie watches Madeleine in Ernie's restaurant — observation as possession, glass as distance"
+          symbolic_category: voyeurism
+          tier: 2
+    - object: cigarette
+      scenes:
+        - description: "Scottie smokes through his investigation — the detective's cigarette as thinking-object, processing obsession"
+          symbolic_category: obsessive-contemplation
+          tier: 3
+    - object: clock
+      scenes:
+        - description: "Carlotta's portrait — the repetition of time, a woman trapped in amber, history as trap"
+          symbolic_category: temporal-trap
+          tier: 2
+  density_score: 3
+  letterboxd_url: https://letterboxd.com/film/vertigo/
+  imdb_id: tt0052357
+
+- id: mulholland-drive-2001
+  title: Mulholland Drive
+  year: 2001
+  director: David Lynch
+  objects:
+    - object: mirror
+      scenes:
+        - description: "The diner restroom mirror — Diane sees herself split, the dream-self and the guilty self"
+          symbolic_category: guilty-double
+          tier: 1
+        - description: "Rita cuts her hair in the mirror — the disguise, the new self that is still the old wound"
+          symbolic_category: failed-disguise
+          tier: 2
+    - object: door
+      scenes:
+        - description: "Club Silencio — the door into pure performance, where illusion drops its pretense of reality"
+          symbolic_category: illusory-threshold
+          tier: 1
+        - description: "The blue box and key — the door to the real, the mechanism of the dream's collapse"
+          symbolic_category: dream-collapse
+          tier: 1
+    - object: cigarette
+      scenes:
+        - description: "Betty/Diane smokes in moments of dissociation — the cigarette as reality-anchor that can't hold"
+          symbolic_category: dissociation
+          tier: 2
+  density_score: 3
+  letterboxd_url: https://letterboxd.com/film/mulholland-drive/
+  imdb_id: tt0166924
+
+- id: taxi-driver-1976
+  title: Taxi Driver
+  year: 1976
+  director: Martin Scorsese
+  objects:
+    - object: mirror
+      scenes:
+        - description: "'You talkin' to me?' — the rearview mirror as audience, Travis performing masculinity for himself"
+          symbolic_category: performed-masculinity
+          tier: 1
+        - description: "Travis rehearses in the mirror throughout — the vigilante self-constructed, the role assumed"
+          symbolic_category: role-construction
+          tier: 1
+    - object: gun
+      scenes:
+        - description: "The arm-pistol rig — Travis's body becomes a weapon, flesh and steel fused, masculinity armored"
+          symbolic_category: body-as-weapon
+          tier: 1
+        - description: "The finger-gun at Betsy — seduction and violence as the same gesture"
+          symbolic_category: violence-as-courtship
+          tier: 2
+    - object: cigarette
+      scenes:
+        - description: "Travis never smokes — notable absence in a film saturated with noir atmosphere"
+          symbolic_category: notable-absence
+          tier: 3
+  density_score: 3
+  letterboxd_url: https://letterboxd.com/film/taxi-driver/
+  imdb_id: tt0075314
+
+- id: the-godfather-1972
+  title: The Godfather
+  year: 1972
+  director: Francis Ford Coppola
+  objects:
+    - object: gun
+      scenes:
+        - description: "Michael's first shooting — the pistol in the restaurant bathroom, the birth of a don"
+          symbolic_category: corruption-threshold
+          tier: 1
+        - description: "The tollbooth ambush — Sonny's death, violence as consequence of impulsiveness"
+          symbolic_category: fatal-impulsiveness
+          tier: 2
+    - object: door
+      scenes:
+        - description: "The Godfather's study door — those who enter as supplicants, who exit as debtors"
+          symbolic_category: obligation-threshold
+          tier: 2
+    - object: cigarette
+      scenes:
+        - description: "Michael lights cigarette after his father's assassination attempt — the son steps in, a dynasty ignites"
+          symbolic_category: dynastic-succession
+          tier: 2
+  density_score: 3
+  letterboxd_url: https://letterboxd.com/film/the-godfather/
+  imdb_id: tt0068646
+
+- id: chinatown-1974
+  title: Chinatown
+  year: 1974
+  director: Roman Polanski
+  objects:
+    - object: cigarette
+      scenes:
+        - description: "Gittes with the bandaged nose — the detective compromised, smoking through the investigation he can't solve"
+          symbolic_category: compromised-authority
+          tier: 1
+        - description: "Evelyn smokes in the car — the doomed woman in the film noir tradition, burning toward her end"
+          symbolic_category: doomed-woman
+          tier: 2
+    - object: clock
+      scenes:
+        - description: "Noah Cross's empire — water rights as time-theft, controlling the future through controlling the past"
+          symbolic_category: time-as-power
+          tier: 2
+    - object: mirror
+      scenes:
+        - description: "The flaw in Evelyn's eye — the imperfection reflected, the secret visible but misread"
+          symbolic_category: misread-sign
+          tier: 2
+  density_score: 3
+  letterboxd_url: https://letterboxd.com/film/chinatown/
+  imdb_id: tt0071315
+
+- id: no-country-for-old-men-2007
+  title: No Country for Old Men
+  year: 2007
+  director: Joel Coen, Ethan Coen
+  objects:
+    - object: gun
+      scenes:
+        - description: "The captive bolt pistol — Anton Chigurh's weapon is industrial, not personal; death as cattle processing"
+          symbolic_category: industrial-death
+          tier: 1
+        - description: "Moss's rifle — the deer hunter turned prey, the hunter's tool turned against him"
+          symbolic_category: hunter-becomes-prey
+          tier: 2
+    - object: door
+      scenes:
+        - description: "Chigurh's coin toss at the gas station — the door of fate, the threshold of arbitrary death"
+          symbolic_category: arbitrary-fate
+          tier: 1
+        - description: "The motel room door with the bullet-hole lock — after the threshold is breached, only silence"
+          symbolic_category: breached-threshold
+          tier: 2
+    - object: clock
+      scenes:
+        - description: "Ed Tom Bell's dreams — the old sheriff watching time run out on a world he can no longer understand"
+          symbolic_category: temporal-obsolescence
+          tier: 2
+  density_score: 3
+  letterboxd_url: https://letterboxd.com/film/no-country-for-old-men/
+  imdb_id: tt0477348
+
+- id: eyes-wide-shut-1999
+  title: Eyes Wide Shut
+  year: 1999
+  director: Stanley Kubrick
+  objects:
+    - object: mirror
+      scenes:
+        - description: "Alice's naked mirror scene opening — beauty as performance, the marriage reflected and distanced"
+          symbolic_category: marital-distance
+          tier: 1
+        - description: "Bill's multiple mirror encounters — the doctor as functionary, seeing only surfaces"
+          symbolic_category: surface-seeing
+          tier: 2
+    - object: door
+      scenes:
+        - description: "The mansion gate — the threshold of the wealthy's secret world, admission as danger"
+          symbolic_category: class-threshold
+          tier: 1
+        - description: "The costume shop door — Nick Nightingale's contact, the door into the underworld of fantasy"
+          symbolic_category: underworld-entry
+          tier: 2
+    - object: cigarette
+      scenes:
+        - description: "The ritual participants — smoking as part of the ceremony, transgression formalized"
+          symbolic_category: ritualized-transgression
+          tier: 3
+  density_score: 3
+  letterboxd_url: https://letterboxd.com/film/eyes-wide-shut/
+  imdb_id: tt0120663
+
+- id: persona-1966
+  title: Persona
+  year: 1966
+  director: Ingmar Bergman
+  objects:
+    - object: mirror
+      scenes:
+        - description: "Alma and Elisabet's faces merge in the mirror — the self dissolves into the other, identity as liquid"
+          symbolic_category: dissolved-identity
+          tier: 1
+        - description: "The double exposure faces — cinema itself as mirror, Bergman's meta-reflection on image-making"
+          symbolic_category: meta-cinema
+          tier: 1
+    - object: cigarette
+      scenes:
+        - description: "Elisabet smokes in silence — the withdrawn woman's only permitted gesture, smoke as speech-substitute"
+          symbolic_category: speech-substitute
+          tier: 2
+  density_score: 3
+  letterboxd_url: https://letterboxd.com/film/persona/
+  imdb_id: tt0060827
+
+- id: suspicion-1941
+  title: Suspicion
+  year: 1941
+  director: Alfred Hitchcock
+  objects:
+    - object: milk
+      scenes:
+        - description: "The famous glowing glass of milk — Johnnie climbs the stairs, the glass luminous with possible poison"
+          symbolic_category: domestic-poison
+          tier: 1
+  density_score: 1
+  letterboxd_url: https://letterboxd.com/film/suspicion/
+  imdb_id: tt0034248
+
+- id: get-out-2017
+  title: Get Out
+  year: 2017
+  director: Jordan Peele
+  objects:
+    - object: milk
+      scenes:
+        - description: "Missy's teacup — the ritual object, milk as medium of hypnotic subjugation and racial terror"
+          symbolic_category: subjugation-ritual
+          tier: 1
+        - description: "Jeremy's Coagula milk glass at dinner — the white family's comfortable consumption, oblivious to horror"
+          symbolic_category: oblivious-consumption
+          tier: 2
+  density_score: 1
+  letterboxd_url: https://letterboxd.com/film/get-out/
+  imdb_id: tt5052448
+
+- id: orphee-1950
+  title: Orphée
+  year: 1950
+  director: Jean Cocteau
+  objects:
+    - object: mirror
+      scenes:
+        - description: "The mirror as portal to the Underworld — Cocteau's central conceit, death as the room on the other side of glass"
+          symbolic_category: death-portal
+          tier: 1
+        - description: "Heurtebise passes hands through the mirror — the magician's touch, materiality suspended"
+          symbolic_category: materiality-suspended
+          tier: 1
+  density_score: 1
+  letterboxd_url: https://letterboxd.com/film/orphee/
+  imdb_id: tt0042909
+
+- id: black-swan-2010
+  title: Black Swan
+  year: 2010
+  director: Darren Aronofsky
+  objects:
+    - object: mirror
+      scenes:
+        - description: "Nina in the studio mirror — the reflection begins moving independently, the double escapes"
+          symbolic_category: escaped-double
+          tier: 1
+        - description: "Nina's transformation scenes — the mirror witnesses the body's metamorphosis, perfection as horror"
+          symbolic_category: transformation-as-horror
+          tier: 1
+  density_score: 1
+  letterboxd_url: https://letterboxd.com/film/black-swan/
+  imdb_id: tt0947798
+
+- id: now-voyager-1942
+  title: Now, Voyager
+  year: 1942
+  director: Irving Rapper
+  objects:
+    - object: cigarette
+      scenes:
+        - description: "Paul lights two cigarettes simultaneously for Charlotte — the defining gesture of 1940s romantic cinema"
+          symbolic_category: romantic-gesture
+          tier: 1
+        - description: "'Why ask for the moon when we have the stars?' — cigarettes as the love that substitutes for love"
+          symbolic_category: substituted-love
+          tier: 1
+  density_score: 1
+  letterboxd_url: https://letterboxd.com/film/now-voyager/
+  imdb_id: tt0035140
+
+- id: high-noon-1952
+  title: High Noon
+  year: 1952
+  director: Fred Zinnemann
+  objects:
+    - object: clock
+      scenes:
+        - description: "Real-time countdown — the clock on screen matches the clock in the theater, dread made structural"
+          symbolic_category: real-time-dread
+          tier: 1
+        - description: "The clock in the marshal's office — Will Kane watching the minutes to his possible death"
+          symbolic_category: awaited-death
+          tier: 1
+  density_score: 1
+  letterboxd_url: https://letterboxd.com/film/high-noon/
+  imdb_id: tt0044706
+
+- id: the-wizard-of-oz-1939
+  title: The Wizard of Oz
+  year: 1939
+  director: Victor Fleming
+  objects:
+    - object: door
+      scenes:
+        - description: "The tornado-cellar door — Dorothy can't get in, the door that would have saved her, the threshold she misses"
+          symbolic_category: missed-threshold
+          tier: 2
+        - description: "The Emerald City gate — the door as gatekeeping, the wizard's refusal of entry, authority as door"
+          symbolic_category: authority-as-door
+          tier: 2
+        - description: "Dorothy's return — 'there's no place like home' and the threshold back across — the threshold AS home"
+          symbolic_category: threshold-as-home
+          tier: 1
+  density_score: 1
+  letterboxd_url: https://letterboxd.com/film/the-wizard-of-oz/
+  imdb_id: tt0032138
+
+- id: unforgiven-1992
+  title: Unforgiven
+  year: 1992
+  director: Clint Eastwood
+  objects:
+    - object: gun
+      scenes:
+        - description: "William Munny's fumbling with the gun — the killer who has renounced violence can't even load it cleanly"
+          symbolic_category: renounced-violence
+          tier: 1
+        - description: "The final saloon sequence — when Munny finally shoots, the myth reclaims him; he becomes the legend"
+          symbolic_category: myth-reclamation
+          tier: 1
+  density_score: 1
+  letterboxd_url: https://letterboxd.com/film/unforgiven/
+  imdb_id: tt0105695
+
+- id: rear-window-1954
+  title: Rear Window
+  year: 1954
+  director: Alfred Hitchcock
+  objects:
+    - object: door
+      scenes:
+        - description: "Thorwald's apartment door — Jefferies watches from a distance; the door he cannot reach becomes the film's center"
+          symbolic_category: unreachable-threshold
+          tier: 1
+        - description: "Lisa's entry into Thorwald's apartment — the threshold crossed by the woman while the man watches"
+          symbolic_category: gendered-threshold
+          tier: 2
+    - object: cigarette
+      scenes:
+        - description: "Jeff smokes while watching — the detective-voyeur's prop, surveillance mediated by tobacco"
+          symbolic_category: voyeuristic-prop
+          tier: 2
+  density_score: 2
+  letterboxd_url: https://letterboxd.com/film/rear-window/
+  imdb_id: tt0047396
+
+- id: the-silence-of-the-lambs-1991
+  title: The Silence of the Lambs
+  year: 1991
+  director: Jonathan Demme
+  objects:
+    - object: door
+      scenes:
+        - description: "Lecter's cell — the plexiglass door as the line between civilization and appetite"
+          symbolic_category: civilization-threshold
+          tier: 1
+        - description: "Buffalo Bill's basement — the door Clarice descends through, the final threshold of the hunt"
+          symbolic_category: hunt-threshold
+          tier: 1
+    - object: gun
+      scenes:
+        - description: "Clarice's service weapon — inadequate, wrong caliber, the institutional gun that fails in darkness"
+          symbolic_category: institutional-failure
+          tier: 2
+  density_score: 2
+  letterboxd_url: https://letterboxd.com/film/the-silence-of-the-lambs/
+  imdb_id: tt0102926
+
+- id: the-graduate-1967
+  title: The Graduate
+  year: 1967
+  director: Mike Nichols
+  objects:
+    - object: door
+      scenes:
+        - description: "The church door — Ben beats on the glass, the threshold of the already-spoken vow, too late and not too late"
+          symbolic_category: last-minute-threshold
+          tier: 1
+    - object: cigarette
+      scenes:
+        - description: "Mrs. Robinson smokes throughout — the bored housewife's prop, sexuality rendered as ash"
+          symbolic_category: bored-sexuality
+          tier: 2
+  density_score: 2
+  letterboxd_url: https://letterboxd.com/film/the-graduate/
+  imdb_id: tt0061722
+
+- id: all-about-eve-1950
+  title: All About Eve
+  year: 1950
+  director: Joseph L. Mankiewicz
+  objects:
+    - object: mirror
+      scenes:
+        - description: "The final hall-of-mirrors shot — Phoebe in Margo's dress, the infinite regress of female ambition"
+          symbolic_category: infinite-regress
+          tier: 1
+    - object: cigarette
+      scenes:
+        - description: "Addison DeWitt smokes throughout — the critic as predator, cigarette as superior scorn"
+          symbolic_category: predatory-scorn
+          tier: 2
+  density_score: 2
+  letterboxd_url: https://letterboxd.com/film/all-about-eve/
+  imdb_id: tt0042192
+
+- id: sunset-boulevard-1950
+  title: Sunset Boulevard
+  year: 1950
+  director: Billy Wilder
+  objects:
+    - object: mirror
+      scenes:
+        - description: "Norma Desmond in her vast mirrors — the silent era star who cannot stop watching herself, the past as reflection"
+          symbolic_category: past-as-reflection
+          tier: 1
+    - object: cigarette
+      scenes:
+        - description: "Joe Gillis smokes as he dictates from the pool — the dead man narrating, the cigarette that outlasts him"
+          symbolic_category: posthumous-narration
+          tier: 2
+  density_score: 2
+  letterboxd_url: https://letterboxd.com/film/sunset-boulevard/
+  imdb_id: tt0043014
+
+- id: the-third-man-1949
+  title: The Third Man
+  year: 1949
+  director: Carol Reed
+  objects:
+    - object: door
+      scenes:
+        - description: "The doorway where Harry Lime appears — the cat's shadow, then the man himself, the threshold of reappearance"
+          symbolic_category: ghostly-reappearance
+          tier: 1
+    - object: cigarette
+      scenes:
+        - description: "Holly Martins smokes through his investigation — the B-Western author in a noir world, wrong genre"
+          symbolic_category: wrong-genre
+          tier: 3
+  density_score: 2
+  letterboxd_url: https://letterboxd.com/film/the-third-man/
+  imdb_id: tt0041959
