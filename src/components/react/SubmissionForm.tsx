@@ -240,7 +240,7 @@ function ObjectTab({
           submitter_email: submitterEmail || null,
         }),
       });
-      const json = await res.json();
+      const json = await res.json() as { error?: string };
       if (!res.ok) {
         onError(json.error ?? 'Submission failed.');
       } else {
@@ -430,7 +430,7 @@ function FilmTab({
           submitter_email: null,
         }),
       });
-      const json = await res.json();
+      const json = await res.json() as { error?: string };
       if (!res.ok) {
         onError(json.error ?? 'Submission failed.');
       } else {
@@ -631,7 +631,7 @@ function ClipTab({
           submitter_email: null,
         }),
       });
-      const json = await res.json();
+      const json = await res.json() as { error?: string };
       if (!res.ok) {
         onError(json.error ?? 'Submission failed.');
       } else {

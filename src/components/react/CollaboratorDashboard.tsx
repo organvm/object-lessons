@@ -96,7 +96,7 @@ function LoginForm({ onSuccess }: { onSuccess: () => void }) {
       if (res.ok) {
         onSuccess();
       } else {
-        const json = await res.json();
+        const json = await res.json() as { error?: string };
         setError(json.error ?? 'Authentication failed.');
       }
     } catch {
@@ -278,7 +278,7 @@ function PendingSubmissions() {
         if (!res.ok) throw new Error('Failed to load');
         return res.json();
       })
-      .then((data: Submission[]) => setSubmissions(data))
+      .then((data: unknown) => setSubmissions(data as Submission[]))
       .catch(() => setSubmissions([]))
       .finally(() => setLoading(false));
   }, []);

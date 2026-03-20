@@ -13,7 +13,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       });
     }
 
-    const body = await request.json();
+    const body = await request.json() as Record<string, any>;
 
     if (!['object', 'film', 'clip'].includes(body.type)) {
       return new Response(JSON.stringify({ error: 'Invalid submission type' }), {

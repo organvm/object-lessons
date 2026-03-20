@@ -15,7 +15,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       });
     }
 
-    const body = await request.json();
+    const body = await request.json() as Record<string, unknown>;
     const { password } = body ?? {};
 
     if (typeof password !== 'string') {

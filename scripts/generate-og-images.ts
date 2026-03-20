@@ -73,8 +73,10 @@ async function generateOG(
   outputPath: string,
   font: SatoriFont,
 ): Promise<void> {
+  // satori accepts VNode-like objects at runtime; cast to satisfy strict ReactNode typing
   const svg = await satori(
-    {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ({
       type: 'div',
       props: {
         style: {
@@ -140,7 +142,8 @@ async function generateOG(
           },
         ].filter(Boolean),
       },
-    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }) as any,
     {
       width: 1200,
       height: 630,

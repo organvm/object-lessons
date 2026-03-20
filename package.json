@@ -7,33 +7,36 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "npm run validate && npm run og && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "og": "tsx scripts/generate-og-images.ts",
-    "validate": "tsx scripts/validate-categories.ts"
+    "validate": "tsx scripts/validate-categories.ts",
+    "check": "astro check"
   },
   "dependencies": {
-    "astro": "^5.18.1",
+    "@astrojs/cloudflare": "^12.6.13",
     "@astrojs/mdx": "^4.3.14",
     "@astrojs/react": "^4.4.2",
-    "@astrojs/tailwind": "^5.1.5",
-    "@astrojs/sitemap": "^3.7.1",
-    "@astrojs/cloudflare": "^12.6.13",
     "@astrojs/rss": "^4.0.17",
+    "@astrojs/sitemap": "^3.7.1",
+    "@astrojs/tailwind": "^5.1.5",
+    "@tanstack/react-table": "*",
+    "astro": "^5.18.1",
     "react": "^19",
     "react-dom": "^19",
-    "@tanstack/react-table": "*",
     "tailwindcss": "^3.4.0",
-    "zod": "*",
-    "yaml": "*"
+    "yaml": "*",
+    "zod": "*"
   },
   "devDependencies": {
+    "@astrojs/check": "0.9.8",
+    "@cloudflare/workers-types": "4.20260317.1",
+    "@resvg/resvg-js": "*",
     "@types/react": "*",
     "@types/react-dom": "*",
-    "typescript": "*",
     "satori": "*",
-    "@resvg/resvg-js": "*",
-    "tsx": "*"
+    "tsx": "*",
+    "typescript": "*"
   }
 }

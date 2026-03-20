@@ -88,9 +88,9 @@ const statusLabels: Record<string, string> = {
                 <div class="flex gap-1 flex-wrap">
                   {(['outline', 'narration', 'edit'] as const).map(stage => (
                     <span class={`text-xs font-mono px-1 py-0.5 rounded border ${
-                      (obj as Record<string, string>)[stage] === 'complete'
+                      (obj as Record<string, unknown>)[stage] === 'complete'
                         ? 'border-green-300 text-green-700 bg-green-50'
-                        : (obj as Record<string, string>)[stage] === 'not-started'
+                        : (obj as Record<string, unknown>)[stage] === 'not-started'
                           ? 'border-divider text-secondary bg-data-bg opacity-50'
                           : 'border-amber-300 text-amber-700 bg-amber-50'
                     }`}>
