@@ -1,0 +1,29 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  film?: string;
+  year?: number;
+}
+
+const { src, alt, caption, film, year } = Astro.props;
+
+const hasFilmCredit = film && year;
+---
+
+<figure class="my-8">
+  <img
+    src={src}
+    alt={alt}
+    class="w-full rounded"
+    loading="lazy"
+  />
+  {(caption || hasFilmCredit) && (
+    <figcaption class="text-sm text-secondary mt-2 italic">
+      {caption}
+      {caption && hasFilmCredit && ' '}
+      {hasFilmCredit && `— ${film} (${year})`}
+    </figcaption>
+  )}
+</figure>

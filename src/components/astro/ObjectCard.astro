@@ -1,0 +1,45 @@
+---
+import StatusBadge from './StatusBadge.astro';
+
+interface Props {
+  name: string;
+  slug: string;
+  status: 'published' | 'in-production' | 'researching' | 'candidate';
+  filmCount: number;
+  priorityScore: number;
+}
+
+const { name, slug, status, filmCount, priorityScore } = Astro.props;
+
+// Render priority as filled dots out of 5
+const maxDots = 5;
+const filledDots = Math.min(Math.round(priorityScore), maxDots);
+---
+
+<article class="group border border-divider rounded p-4 bg-surface hover:border-accent transition-colors duration-150">
+  <a
+    href={`/objects/${slug}`}
+    class="block no-underline"
+  >
+    <h3 class="font-serif text-base font-medium text-primary group-hover:text-link transition-colors duration-150 m-0 mb-2 leading-snug">
+      {name}
+    </h3>
+
+    <div class="flex items-center justify-between gap-2 flex-wrap">
+      <StatusBadge status={status} />
+      <span class="text-xs text-secondary">{filmCount} film{filmCount !== 1 ? 's' : ''}</span>
+    </div>
+
+    <div class="flex items-center gap-1 mt-3" aria-label={`Priority score: ${priorityScore} out of ${maxDots}`}>
+      {Array.from({ length: maxDots }).map((_, i) => (
+        <span
+          class:list={[
+            'w-2 h-2 rounded-full',
+            i < filledDots ? 'bg-accent' : 'bg-divider',
+          ]}
+          aria-hidden="true"
+        />
+      ))}
+    </div>
+  </a>
+</article>

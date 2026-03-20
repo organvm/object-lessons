@@ -1,0 +1,10 @@
+---
+interface Props {
+  num: number;
+  key: string;
+}
+
+const { num, key } = Astro.props;
+---
+
+<sup><a href={`#fn-${key}`} id={`ref-${key}`} class="text-link">[{num}]</a></sup>

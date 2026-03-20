@@ -1,0 +1,63 @@
+---
+interface Props {
+  videoId: string;
+  title: string;
+}
+
+const { videoId, title } = Astro.props;
+const thumbUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+const embedId = `yt-${videoId}`;
+---
+
+<div
+  id={embedId}
+  class="relative aspect-video w-full overflow-hidden rounded bg-black cursor-pointer group"
+  data-video-id={videoId}
+>
+  <!-- Thumbnail -->
+  <img
+    src={thumbUrl}
+    alt={`Thumbnail for ${title}`}
+    class="w-full h-full object-cover transition-opacity duration-200 group-hover:opacity-90"
+    loading="lazy"
+  />
+
+  <!-- Play button overlay -->
+  <button
+    aria-label={`Play ${title}`}
+    class="absolute inset-0 flex items-center justify-center focus:outline-none focus-visible:ring-4 focus-visible:ring-white"
+  >
+    <span class="relative flex items-center justify-center w-16 h-16 rounded-full bg-[#FF0000] shadow-lg transition-transform duration-150 group-hover:scale-110">
+      <!-- Triangle play icon -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="white"
+        class="w-7 h-7 ml-1"
+        aria-hidden="true"
+      >
+        <path d="M8 5v14l11-7z" />
+      </svg>
+    </span>
+  </button>
+</div>
+
+<script>
+  // Lite-YouTube facade: swap thumbnail for iframe on click
+  document.querySelectorAll<HTMLDivElement>('[data-video-id]').forEach((el) => {
+    el.addEventListener('click', () => {
+      const videoId = el.dataset.videoId;
+      if (!videoId) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      iframe.title = el.querySelector('img')?.alt ?? 'YouTube video';
+      iframe.allow =
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.className = 'absolute inset-0 w-full h-full';
+      // Clear and replace with iframe
+      el.innerHTML = '';
+      el.appendChild(iframe);
+    });
+  });
+</script>

@@ -1,0 +1,33 @@
+---
+import Nav from './Nav.astro';
+import { siteConfig } from '@lib/config';
+
+interface Props {
+  isHome?: boolean;
+}
+
+const { isHome = false } = Astro.props;
+---
+
+<header class="border-b border-divider bg-surface">
+  <div class="max-w-content mx-auto px-6 py-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <div>
+      {isHome ? (
+        <h1 class="text-3xl font-serif font-light tracking-wide leading-none m-0">
+          {siteConfig.name}
+        </h1>
+      ) : (
+        <a
+          href="/"
+          class="text-3xl font-serif font-light tracking-wide leading-none text-primary no-underline hover:no-underline"
+        >
+          {siteConfig.name}
+        </a>
+      )}
+      <p class="text-xs text-accent tracking-widest uppercase mt-1 mb-0">
+        {siteConfig.tagline}
+      </p>
+    </div>
+    <Nav />
+  </div>
+</header>

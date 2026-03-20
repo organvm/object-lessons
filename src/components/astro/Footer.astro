@@ -1,0 +1,44 @@
+---
+import { siteConfig } from '@lib/config';
+
+const socials = Object.entries(siteConfig.socials).filter(([, url]) => url !== '');
+
+const socialLabels: Record<string, string> = {
+  youtube: 'YouTube',
+  patreon: 'Patreon',
+  letterboxd: 'Letterboxd',
+  bluesky: 'Bluesky',
+  email: 'Email',
+};
+---
+
+<footer class="border-t border-divider bg-surface mt-16">
+  <div class="max-w-content mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-secondary">
+    <div class="flex gap-5 items-center flex-wrap">
+      {socials.map(([key, url]) => (
+        <a
+          href={key === 'email' ? `mailto:${url}` : url}
+          class="hover:text-primary transition-colors no-underline"
+          rel={key !== 'email' ? 'noopener noreferrer' : undefined}
+          target={key !== 'email' ? '_blank' : undefined}
+        >
+          {socialLabels[key] ?? key}
+        </a>
+      ))}
+      <a href="/rss.xml" class="hover:text-primary transition-colors no-underline">
+        RSS
+      </a>
+    </div>
+    <p class="text-xs text-accent m-0">
+      Built with{' '}
+      <a
+        href="https://github.com/4444j99/object-lessons-template"
+        class="hover:text-primary transition-colors"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Object Lessons Template
+      </a>
+    </p>
+  </div>
+</footer>

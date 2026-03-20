@@ -1,0 +1,27 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: 'website' | 'article' | 'video.other';
+  jsonLd?: object;
+  isHome?: boolean;
+}
+
+const { title, description, image, type, jsonLd, isHome } = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  image={image}
+  type={type}
+  jsonLd={jsonLd}
+  isHome={isHome}
+>
+  <div class="reading-column">
+    <slot />
+  </div>
+</BaseLayout>

@@ -1,0 +1,52 @@
+---
+import '../styles/global.css';
+import SEO from '../components/astro/SEO.astro';
+import Header from '../components/astro/Header.astro';
+import Footer from '../components/astro/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: 'website' | 'article' | 'video.other';
+  jsonLd?: object;
+  isHome?: boolean;
+}
+
+const { title, description, image, type, jsonLd, isHome = false } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <SEO
+      title={title}
+      description={description}
+      image={image}
+      type={type}
+      jsonLd={jsonLd}
+    />
+  </head>
+  <body class="bg-surface text-primary min-h-screen flex flex-col">
+    <Header isHome={isHome} />
+    <main class="flex-1 py-12">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
