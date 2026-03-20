@@ -1,0 +1,89 @@
+---
+import DataLayout from '../../layouts/DataLayout.astro';
+import EpisodeCard from '../../components/astro/EpisodeCard.astro';
+import { getCollection } from 'astro:content';
+
+const allEpisodes = await getCollection('episodes');
+const url = Astro.url;
+const versionFilter = url.searchParams.get('version');
+
+const episodes = allEpisodes
+  .filter(e => !versionFilter || e.data.version === versionFilter)
+  .sort((a, b) => {
+    // Published before upcoming
+    const statusWeight = (s: string) =>
+      s === 'published' ? 0 : s === 'scripted' ? 1 : s === 'in-production' ? 2 : 3;
+    const sw = statusWeight(a.data.status) - statusWeight(b.data.status);
+    if (sw !== 0) return sw;
+    return b.data.date.getTime() - a.data.date.getTime();
+  });
+
+const activeFilter = versionFilter ?? 'all';
+---
+
+<DataLayout
+  title="Episodes — Object Lessons"
+  description="Every Object Lesson — compilations and narrated essays tracing recurring objects across a hundred years of film."
+>
+  <div class="mb-10">
+    <h1 class="mb-2">Episodes</h1>
+    <p class="text-secondary text-lg mt-0">
+      Every Object Lesson — compilations and narrated essays.
+    </p>
+
+    <nav class="flex items-center gap-4 mt-6 text-sm font-sans" aria-label="Filter by version">
+      <a
+        href="/episodes"
+        class:list={[
+          'px-3 py-1.5 rounded border transition-colors duration-100 no-underline',
+          activeFilter === 'all'
+            ? 'border-accent text-primary bg-data-bg'
+            : 'border-divider text-secondary hover:border-accent hover:text-primary',
+        ]}
+      >
+        All
+      </a>
+      <a
+        href="/episodes?version=v1"
+        class:list={[
+          'px-3 py-1.5 rounded border transition-colors duration-100 no-underline',
+          activeFilter === 'v1'
+            ? 'border-accent text-primary bg-data-bg'
+            : 'border-divider text-secondary hover:border-accent hover:text-primary',
+        ]}
+      >
+        V1 — Compilations
+      </a>
+      <a
+        href="/episodes?version=v2"
+        class:list={[
+          'px-3 py-1.5 rounded border transition-colors duration-100 no-underline',
+          activeFilter === 'v2'
+            ? 'border-accent text-primary bg-data-bg'
+            : 'border-divider text-secondary hover:border-accent hover:text-primary',
+        ]}
+      >
+        V2 — Narrated Hybrid
+      </a>
+    </nav>
+  </div>
+
+  {episodes.length === 0 ? (
+    <p class="text-secondary">No episodes match this filter.</p>
+  ) : (
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {episodes.map(ep => (
+        <EpisodeCard
+          title={ep.data.title}
+          slug={ep.slug}
+          object={ep.data.object}
+          version={ep.data.version}
+          status={ep.data.status}
+          duration={ep.data.duration}
+          date={ep.data.date}
+          youtubeId={ep.data.youtube_id}
+        />
+      ))}
+    </div>
+  )}
+</DataLayout>

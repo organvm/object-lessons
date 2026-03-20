@@ -1,0 +1,44 @@
+---
+import DataLayout from '../../layouts/DataLayout.astro';
+import ObjectCard from '../../components/astro/ObjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const allObjects = await getCollection('objects');
+
+const statusOrder: Record<string, number> = {
+  published: 0,
+  'in-production': 1,
+  researching: 2,
+  candidate: 3,
+};
+
+const objects = allObjects.sort((a, b) => {
+  const sw = (statusOrder[a.data.status] ?? 99) - (statusOrder[b.data.status] ?? 99);
+  if (sw !== 0) return sw;
+  return b.data.priority_score - a.data.priority_score;
+});
+---
+
+<DataLayout
+  title="The Object Catalog — Object Lessons"
+  description="Every object we track — published, in production, researching, and candidates. Each object's entire filmographic history classified and cataloged."
+>
+  <div class="mb-10">
+    <h1 class="mb-2">The Object Catalog</h1>
+    <p class="text-secondary text-lg mt-0">
+      Every object we track — published, in production, researching, and candidates.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    {objects.map(obj => (
+      <ObjectCard
+        name={obj.data.name}
+        slug={obj.slug}
+        status={obj.data.status}
+        filmCount={obj.data.film_count}
+        priorityScore={obj.data.priority_score}
+      />
+    ))}
+  </div>
+</DataLayout>

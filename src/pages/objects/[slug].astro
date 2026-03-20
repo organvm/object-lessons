@@ -1,0 +1,177 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StatusBadge from '../../components/astro/StatusBadge.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const objects = await getCollection('objects');
+  return objects.map(o => ({ params: { slug: o.slug }, props: { object: o } }));
+}
+
+const { object: obj } = Astro.props;
+const { Content } = await obj.render();
+
+// Tier 1 landmark scenes only
+const tier1Scenes = obj.data.landmark_scenes.filter(s => s.tier === 1);
+
+// Related episodes + essays from this object's lists
+const allEpisodes = await getCollection('episodes');
+const allEssays = await getCollection('essays');
+
+const relatedEpisodes = allEpisodes.filter(e => obj.data.episodes.includes(e.slug));
+const relatedEssays = allEssays.filter(e => obj.data.essays.includes(e.slug));
+---
+
+<BaseLayout
+  title={`${obj.data.name} in Cinema — Object Catalog`}
+  description={`${obj.data.film_count} films cataloged. Every appearance of ${obj.data.name} in cinema — classified, analyzed, and ranked.`}
+>
+  {/* Object header — reading column */}
+  <div class="reading-column mb-10">
+    <p class="text-secondary text-xs uppercase tracking-widest mb-4 font-sans">The Object Catalog</p>
+    <h1 class="mb-3">{obj.data.name}</h1>
+
+    <div class="flex flex-wrap items-center gap-3 text-sm font-sans mb-6">
+      <StatusBadge status={obj.data.status} />
+      <span class="text-divider" aria-hidden="true">·</span>
+      <span class="text-secondary">{obj.data.film_count} films cataloged</span>
+    </div>
+
+    {/* MDX body — object biography */}
+    <div class="prose prose-stone max-w-none">
+      <Content />
+    </div>
+  </div>
+
+  {/* Symbolic categories — reading column */}
+  {obj.data.symbolic_categories.length > 0 && (
+    <div class="reading-column mb-12">
+      <h2 class="text-sm uppercase tracking-widest text-secondary font-sans font-medium mb-4">
+        Symbolic Categories
+      </h2>
+      <div class="space-y-2">
+        {obj.data.symbolic_categories.map(cat => (
+          <details class="group border border-divider rounded overflow-hidden">
+            <summary class="flex items-center justify-between px-4 py-3 cursor-pointer list-none font-medium text-sm text-primary hover:bg-data-bg transition-colors duration-100">
+              {cat.name}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 text-secondary transition-transform duration-150 group-open:rotate-180 flex-shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <p class="px-4 pb-4 pt-2 text-sm text-secondary leading-relaxed m-0">
+              {cat.description}
+            </p>
+          </details>
+        ))}
+      </div>
+    </div>
+  )}
+
+  {/* Landmark scenes — reading column */}
+  {tier1Scenes.length > 0 && (
+    <div class="reading-column mb-12">
+      <h2 class="text-sm uppercase tracking-widest text-secondary font-sans font-medium mb-4">
+        Landmark Scenes
+      </h2>
+      <ul class="space-y-4 list-none p-0 m-0">
+        {tier1Scenes.map(scene => (
+          <li class="border-l-2 border-accent pl-4">
+            <p class="font-medium text-sm text-primary m-0 mb-1 capitalize">
+              {scene.film.replace(/-\d{4}$/, '').replace(/-/g, ' ')}
+            </p>
+            <p class="text-sm text-secondary m-0">{scene.description}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+
+  {/* Co-occurrences — reading column */}
+  {obj.data.co_occurrences.length > 0 && (
+    <div class="reading-column mb-12">
+      <h2 class="text-sm uppercase tracking-widest text-secondary font-sans font-medium mb-4">
+        Also Appears With
+      </h2>
+      <ul class="flex flex-wrap gap-3 list-none p-0 m-0">
+        {obj.data.co_occurrences.map(co => (
+          <li>
+            <a
+              href={`/objects/${co.object}`}
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-divider text-sm text-primary no-underline hover:border-accent hover:text-link transition-colors duration-100 capitalize"
+            >
+              {co.object}
+              <span class="text-secondary text-xs">({co.count})</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+
+  {/* FilmographyTable placeholder — content wide */}
+  <div id="filmography-placeholder" class="content-wide my-12">
+    <p class="text-secondary text-center font-sans text-sm">Filmography table loading...</p>
+  </div>
+
+  {/* Related episodes — reading column */}
+  {relatedEpisodes.length > 0 && (
+    <div class="reading-column mb-10">
+      <h2 class="text-sm uppercase tracking-widest text-secondary font-sans font-medium mb-4">
+        Episodes
+      </h2>
+      <ul class="space-y-2 list-none p-0 m-0">
+        {relatedEpisodes.map(ep => (
+          <li>
+            <a
+              href={`/episodes/${ep.slug}`}
+              class="text-link hover:underline text-sm"
+            >
+              {ep.data.title}
+            </a>
+            <span class="text-secondary text-xs ml-2">
+              {ep.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+
+  {/* Related essays — reading column */}
+  {relatedEssays.length > 0 && (
+    <div class="reading-column mb-10">
+      <h2 class="text-sm uppercase tracking-widest text-secondary font-sans font-medium mb-4">
+        Essays
+      </h2>
+      <ul class="space-y-2 list-none p-0 m-0">
+        {relatedEssays.map(e => (
+          <li>
+            <a
+              href={`/essays/${e.slug}`}
+              class="text-link hover:underline text-sm"
+            >
+              {e.data.title}
+            </a>
+            <span class="text-secondary text-xs ml-2 capitalize">{e.data.type}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+
+  {/* CTA — reading column */}
+  <div class="reading-column mb-16 pt-8 border-t border-divider">
+    <p class="text-secondary text-sm">
+      Know a film with <span class="text-primary font-medium">{obj.data.name}</span>?{' '}
+      <a href="/submit" class="text-link hover:underline">Submit it →</a>
+    </p>
+  </div>
+</BaseLayout>

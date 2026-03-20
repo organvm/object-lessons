@@ -1,0 +1,99 @@
+---
+import EssayLayout from '../../layouts/EssayLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const essays = await getCollection('essays');
+  return essays.map(e => ({ params: { slug: e.slug }, props: { essay: e } }));
+}
+
+const { essay } = Astro.props;
+const { Content } = await essay.render();
+
+const formattedDate = essay.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const typeLabels: Record<string, string> = {
+  companion: 'Companion',
+  standalone: 'Standalone',
+  'research-note': 'Research Note',
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: essay.data.title,
+  datePublished: essay.data.date.toISOString(),
+  about: essay.data.object,
+};
+---
+
+<EssayLayout
+  title={`${essay.data.title} — Object Lessons`}
+  description={essay.data.excerpt}
+  type="article"
+  jsonLd={jsonLd}
+>
+  {/* Essay header */}
+  <header class="mb-10">
+    <h1 class="mb-4">{essay.data.title}</h1>
+
+    <div class="flex flex-wrap items-center gap-3 text-sm font-sans">
+      <a
+        href={`/objects/${essay.data.object}`}
+        class="text-accent font-medium capitalize hover:underline no-underline"
+      >
+        {essay.data.object}
+      </a>
+      <span class="text-divider" aria-hidden="true">·</span>
+      <span class="px-2 py-0.5 rounded bg-data-bg text-secondary text-xs uppercase tracking-wider">
+        {typeLabels[essay.data.type] ?? essay.data.type}
+      </span>
+      <span class="text-divider" aria-hidden="true">·</span>
+      <time datetime={essay.data.date.toISOString()} class="text-secondary">
+        {formattedDate}
+      </time>
+    </div>
+  </header>
+
+  {/* MDX body */}
+  <div class="prose prose-stone max-w-none">
+    <Content />
+  </div>
+
+  {/* Citations */}
+  {essay.data.citations.length > 0 && (
+    <section class="mt-12 pt-8 border-t border-divider">
+      <h2 class="text-sm uppercase tracking-widest text-secondary font-sans font-medium mb-4">
+        Works Cited
+      </h2>
+      <ol class="space-y-2 list-decimal list-inside pl-0">
+        {essay.data.citations.map(c => (
+          <li id={`cite-${c.key}`} class="text-sm text-secondary leading-relaxed">
+            <span set:html={c.text} />
+          </li>
+        ))}
+      </ol>
+    </section>
+  )}
+
+  {/* Related episode link (companion essays) */}
+  {essay.data.type === 'companion' && essay.data.related_episodes.length > 0 && (
+    <section class="mt-8 pt-6 border-t border-divider">
+      <p class="text-sm text-secondary">
+        Watch the episode:{' '}
+        <a href={`/episodes/${essay.data.related_episodes[0]}`} class="text-link hover:underline">
+          View on Object Lessons →
+        </a>
+      </p>
+    </section>
+  )}
+
+  {/* Footer nav */}
+  <div class="mt-12 pt-6 border-t border-divider text-sm">
+    <a href="/essays" class="text-link hover:underline">← Read more essays</a>
+  </div>
+</EssayLayout>

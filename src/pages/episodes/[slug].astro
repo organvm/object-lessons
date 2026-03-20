@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import YouTubeEmbed from '../../components/astro/YouTubeEmbed.astro';
+import StatusBadge from '../../components/astro/StatusBadge.astro';
+import EpisodeCard from '../../components/astro/EpisodeCard.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const episodes = await getCollection('episodes');
+  return episodes.map(ep => ({ params: { slug: ep.slug }, props: { episode: ep } }));
+}
+
+const { episode } = Astro.props;
+const { Content } = await episode.render();
+
+const formattedDate = episode.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+// Related episodes: same object or overlapping symbolic categories, excluding self
+const allEpisodes = await getCollection('episodes');
+const related = allEpisodes
+  .filter(e => e.slug !== episode.slug && e.data.object === episode.data.object)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+// Fetch object data for symbolic category descriptions
+const allObjects = await getCollection('objects');
+const parentObject = allObjects.find(o => o.slug === episode.data.object);
+const symCats = parentObject?.data.symbolic_categories ?? [];
+const episodeCatKebabs = new Set(episode.data.symbolic_categories);
+const relevantCats = symCats.filter(c => episodeCatKebabs.has(c.kebab));
+
+const hasVideo = episode.data.youtube_id !== 'PLACEHOLDER';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: episode.data.title,
+  description: episode.data.seo.description,
+  uploadDate: episode.data.date.toISOString(),
+  ...(hasVideo && {
+    embedUrl: `https://www.youtube.com/embed/${episode.data.youtube_id}`,
+    thumbnailUrl: `https://img.youtube.com/vi/${episode.data.youtube_id}/maxresdefault.jpg`,
+  }),
+};
+---
+
+<BaseLayout
+  title={`${episode.data.title} — Object Lessons`}
+  description={episode.data.seo.description}
+  image={hasVideo ? `https://img.youtube.com/vi/${episode.data.youtube_id}/maxresdefault.jpg` : undefined}
+  type="video.other"
+  jsonLd={jsonLd}
+>
+  {/* YouTube embed — full content width */}
+  {hasVideo && (
+    <div class="content-wide mb-10">
+      <YouTubeEmbed videoId={episode.data.youtube_id} title={episode.data.title} />
+    </div>
+  )}
+
+  {/* Episode metadata — reading column */}
+  <div class="reading-column">
+    <h1 class="mb-3">{episode.data.title}</h1>
+
+    <div class="flex flex-wrap items-center gap-3 text-sm mb-6">
+      <a
+        href={`/objects/${episode.data.object}`}
+        class="text-accent font-medium capitalize hover:underline no-underline"
+      >
+        {episode.data.object}
+      </a>
+      <span class="text-divider" aria-hidden="true">·</span>
+      <time datetime={episode.data.date.toISOString()} class="text-secondary">
+        {formattedDate}
+      </time>
+      {episode.data.duration && (
+        <>
+          <span class="text-divider" aria-hidden="true">·</span>
+          <span class="text-secondary">{episode.data.duration}</span>
+        </>
+      )}
+      <span class="text-divider" aria-hidden="true">·</span>
+      <span class="font-mono text-xs font-semibold px-1.5 py-0.5 rounded border border-divider text-secondary uppercase tracking-wider">
+        {episode.data.version}
+      </span>
+      <StatusBadge status={episode.data.status} />
+    </div>
+
+    {episode.data.companion_essay && (
+      <p class="text-sm mb-8 p-4 rounded border border-divider bg-data-bg">
+        Companion essay:{' '}
+        <a href={`/essays/${episode.data.companion_essay}`} class="text-link hover:underline">
+          Read the written companion →
+        </a>
+      </p>
+    )}
+
+    {/* MDX body */}
+    <div class="prose prose-stone max-w-none">
+      <Content />
+    </div>
+
+    {/* Symbolic categories */}
+    {relevantCats.length > 0 && (
+      <section class="mt-12 pt-8 border-t border-divider">
+        <h2 class="text-sm uppercase tracking-widest text-secondary font-sans font-medium mb-4">
+          Symbolic Categories
+        </h2>
+        <ul class="space-y-3 list-none p-0 m-0">
+          {relevantCats.map(cat => (
+            <li class="flex flex-col gap-0.5">
+              <span class="font-medium text-primary text-sm">{cat.name}</span>
+              <span class="text-secondary text-sm">{cat.description}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </div>
+
+  {/* FilmographyTable placeholder — content wide */}
+  <div id="filmography-placeholder" class="content-wide my-12">
+    <p class="text-secondary text-center font-sans text-sm">Filmography table loading...</p>
+  </div>
+
+  {/* Related episodes */}
+  {related.length > 0 && (
+    <div class="content-wide mt-4 mb-16">
+      <h2 class="text-sm uppercase tracking-widest text-secondary font-sans font-medium mb-6">
+        More Episodes
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {related.map(ep => (
+          <EpisodeCard
+            title={ep.data.title}
+            slug={ep.slug}
+            object={ep.data.object}
+            version={ep.data.version}
+            status={ep.data.status}
+            duration={ep.data.duration}
+            date={ep.data.date}
+            youtubeId={ep.data.youtube_id}
+          />
+        ))}
+      </div>
+    </div>
+  )}
+</BaseLayout>

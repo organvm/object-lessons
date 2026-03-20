@@ -1,0 +1,116 @@
+---
+import EssayLayout from '../../layouts/EssayLayout.astro';
+import EssayCard from '../../components/astro/EssayCard.astro';
+import { getCollection } from 'astro:content';
+
+const allEssays = await getCollection('essays');
+const url = Astro.url;
+const typeFilter = url.searchParams.get('type');
+const objectFilter = url.searchParams.get('object');
+
+const essays = allEssays
+  .filter(e => {
+    if (typeFilter && e.data.type !== typeFilter) return false;
+    if (objectFilter && e.data.object !== objectFilter) return false;
+    return true;
+  })
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Unique objects for filter UI
+const allObjects = [...new Set(allEssays.map(e => e.data.object))].sort();
+
+const typeLabels: Record<string, string> = {
+  companion: 'Companion',
+  standalone: 'Standalone',
+  'research-note': 'Research Notes',
+};
+
+const activeType = typeFilter ?? 'all';
+const activeObject = objectFilter ?? 'all';
+---
+
+<EssayLayout
+  title="Essays — Object Lessons"
+  description="Written companions to the video essays, plus standalone research and research notes on recurring objects in cinema."
+>
+  <div class="mb-10">
+    <h1 class="mb-2">Essays</h1>
+    <p class="text-secondary text-lg mt-0">
+      Written companions to the video essays, plus standalone research.
+    </p>
+
+    {/* Type filter */}
+    <nav class="flex flex-wrap items-center gap-3 mt-6 text-sm font-sans" aria-label="Filter by type">
+      {(['all', 'companion', 'standalone', 'research-note'] as const).map(t => {
+        const label = t === 'all' ? 'All' : typeLabels[t];
+        const href = t === 'all'
+          ? `/essays${activeObject !== 'all' ? `?object=${activeObject}` : ''}`
+          : `/essays?type=${t}${activeObject !== 'all' ? `&object=${activeObject}` : ''}`;
+        return (
+          <a
+            href={href}
+            class:list={[
+              'px-3 py-1.5 rounded border transition-colors duration-100 no-underline',
+              activeType === t
+                ? 'border-accent text-primary bg-data-bg'
+                : 'border-divider text-secondary hover:border-accent hover:text-primary',
+            ]}
+          >
+            {label}
+          </a>
+        );
+      })}
+    </nav>
+
+    {/* Object filter */}
+    {allObjects.length > 1 && (
+      <nav class="flex flex-wrap items-center gap-3 mt-3 text-sm font-sans" aria-label="Filter by object">
+        <a
+          href={`/essays${activeType !== 'all' ? `?type=${activeType}` : ''}`}
+          class:list={[
+            'px-3 py-1.5 rounded border transition-colors duration-100 no-underline capitalize',
+            activeObject === 'all'
+              ? 'border-accent text-primary bg-data-bg'
+              : 'border-divider text-secondary hover:border-accent hover:text-primary',
+          ]}
+        >
+          All objects
+        </a>
+        {allObjects.map(obj => {
+          const href = `/essays?object=${obj}${activeType !== 'all' ? `&type=${activeType}` : ''}`;
+          return (
+            <a
+              href={href}
+              class:list={[
+                'px-3 py-1.5 rounded border transition-colors duration-100 no-underline capitalize',
+                activeObject === obj
+                  ? 'border-accent text-primary bg-data-bg'
+                  : 'border-divider text-secondary hover:border-accent hover:text-primary',
+              ]}
+            >
+              {obj}
+            </a>
+          );
+        })}
+      </nav>
+    )}
+  </div>
+
+  {essays.length === 0 ? (
+    <p class="text-secondary">No essays match this filter.</p>
+  ) : (
+    <div>
+      {essays.map(e => (
+        <EssayCard
+          title={e.data.title}
+          slug={e.slug}
+          object={e.data.object}
+          type={e.data.type}
+          date={e.data.date}
+          excerpt={e.data.excerpt}
+          relatedEpisode={e.data.related_episodes[0]}
+        />
+      ))}
+    </div>
+  )}
+</EssayLayout>
