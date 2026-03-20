@@ -1,5 +1,6 @@
-# override global gitignore — public/ is tracked in this web project
+# override global gitignore — public/ and src/lib/ are tracked in this web project
 !public/
+!src/lib/
 
 # build output
 dist/
