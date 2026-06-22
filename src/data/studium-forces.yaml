@@ -1,0 +1,82 @@
+# Object Lessons × THE STUDIUM — the force-axis bridge
+#
+# THE STUDIUM (Anthony's great-books transmission curriculum, repo `limen/studium`) reads the canon
+# through a taxonomy of FORCES (wrath, fate, grief, law, kingship, sacrifice …) and pairs each passage
+# with a "film that relates" — chosen as an OBJECT LESSON: a non-obvious film from film history whose
+# tracked OBJECT (milk/mirror/clock/…) makes the text's force visible.
+#
+# This file is the ADDITIVE overlay that gives THIS catalogue a force-axis without touching the 253-film
+# films.yaml. It joins by Letterboxd slug (`slug`), so films.yaml stays the single source of film identity.
+# `in_object_db: true` = the film is already in films.yaml (films.ts getFilmById/slug); false = a Studium
+# pick not yet catalogued here (a candidate addition).
+#
+# Source of truth: limen/studium/film/<work>.yaml. Regenerate/extend as the Studium adds works.
+# Staged on branch feat/studium-force-bridge — not deployed (his gate). See ../../STUDIUM-BRIDGE.md.
+
+canon_work: iliad           # the first companion; more works (odyssey, aeneid, …) extend this list
+films:
+  - slug: raging-bull
+    force: wrath
+    division: 1
+    object: mirror
+    in_object_db: true
+    object_lesson: "Wrath as a wound to the self-image — the mirror is Achilles' geras, the prize that was only ever the self made visible."
+  - slug: apocalypse-now
+    force: wrath
+    division: 18
+    object: null
+    in_object_db: false
+    object_lesson: "Wrath unmoored from its cause becomes its own metaphysics; Kurtz is Achilles after Patroclus."
+  - slug: paths-of-glory
+    force: law
+    division: 1
+    object: gun
+    in_object_db: false
+    object_lesson: "Authority wears the form of justice to commit the injustice the form cannot answer."
+  - slug: come-and-see
+    force: plague
+    division: 1
+    object: gun
+    in_object_db: false
+    object_lesson: "War as a descending pestilence (Apollo's arrows); the boy's unusable rifle is cancelled agency."
+  - slug: 2001-a-space-odyssey
+    force: divine-intervention
+    division: 20
+    object: clock
+    in_object_db: true
+    object_lesson: "The genuinely OTHER enters on terms humans cannot read — the Iliad's gods are scale, not sympathy."
+  - slug: ran
+    force: kingship
+    division: 9
+    object: null
+    in_object_db: false
+    object_lesson: "Sovereign display is the authority to cause catastrophe, and the cosmos does not underwrite the king."
+  - slug: gallipoli
+    force: sacrifice
+    division: 9
+    object: clock
+    in_object_db: false
+    object_lesson: "Kleos paid for on a gap in time — the failed synchronized watch is the cost of the short glorious life."
+  - slug: the-thin-red-line
+    force: fate
+    division: 16
+    object: null
+    in_object_db: false
+    object_lesson: "Doom is ambient, not punctual; the world keeps being beautiful around the dying."
+  - slug: the-trojan-women-1971
+    force: grief
+    division: 22
+    object: null
+    in_object_db: false
+    object_lesson: "Grief is not a beat in a battle; it is the whole remaining world, counted from the survivors' side."
+  - slug: letters-from-iwo-jima
+    force: supplication
+    division: 24
+    object: null
+    in_object_db: false
+    object_lesson: "Recognition across enmity — the epic of wrath chooses to end in mercy, not slaughter."
+
+# Populated when his Letterboxd export is ingested (limen/scripts/studium-letterboxd.py; tracked by the
+# Letterboxd issue). Each: {slug, rating, watched_date}. Until then this stays empty — the bridge degrades
+# gracefully (a film simply shows no "seen" mark), never breaks.
+watched_overlay: []
