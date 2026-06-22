@@ -1,0 +1,13 @@
+{
+  "ranked": [
+    {
+      "repo": "organvm/object-lessons",
+      "tier": "ranked",
+      "discovered": "2026-06-22",
+      "thesis": "Hand-curated scene-level film-semiotics dataset (253 films, ~329 symbolic categories, tiered scenes, object co-occurrence density) plus ~350K chars of citation-backed essays, wrapped in a deployable Astro/Cloudflare editorial+submission engine for the @AmpLabMedia channel. Reusable estate asset: a queryable object→scene→symbol knowledge graph and a clonable YAML-content-DB site template.",
+      "value_type": "reusable-asset",
+      "first_task": "Expose the 253-film object-semiotics database (src/data/films.yaml via src/lib/films.ts) as a stable, documented public JSON endpoint (/films.json) with a published schema.",
+      "discovery_doc": "DISCOVERY.md"
+    }
+  ]
+}
