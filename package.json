@@ -12,7 +12,9 @@
     "astro": "astro",
     "og": "tsx scripts/generate-og-images.ts",
     "validate": "tsx scripts/validate-categories.ts",
-    "check": "astro check"
+    "check": "astro check",
+    "ingest-letterboxd": "tsx scripts/ingest-letterboxd.ts",
+    "apply-letterboxd-overlay": "tsx scripts/apply-letterboxd-overlay.ts"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.7.0",

@@ -21,6 +21,9 @@ export interface Film {
   density_score: number;
   letterboxd_url?: string;
   imdb_id?: string;
+  watched?: boolean;
+  rating?: number;
+  watched_date?: string;
 }
 
 let _films: Film[] | null = null;
