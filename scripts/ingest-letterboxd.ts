@@ -122,7 +122,7 @@ async function main(): Promise<void> {
     stats: {
       total_entries: history.length,
       matched: 0,
-      unmatched: [],
+      unmatched: 0,
     },
     films: {},
     unmatched: [],
